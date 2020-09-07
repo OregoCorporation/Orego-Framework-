@@ -21,6 +21,7 @@ namespace OregoFramework.App
             this.onResetListeners = new HashSet<IResetListener>();
         }
 
+        /// <inheritdoc cref="RequestChannel.OnAfterRequest"/>
         protected sealed override IEnumerator OnAfterRequest(RequestTask request)
         {
             foreach (var listener in this.onResponseListeners)
@@ -36,6 +37,7 @@ namespace OregoFramework.App
             yield break;
         }
 
+        /// <inheritdoc cref="IResetRequestChannel.Reset"/>
         public void Reset()
         {
             foreach (var resetListener in this.onResetListeners)
@@ -50,21 +52,25 @@ namespace OregoFramework.App
         {
         }
 
+        /// <inheritdoc cref="IResponseRequestChannel.RegisterListener"/>
         public void RegisterListener(IResponseListener listener)
         {
             this.onResponseListeners.Add(listener);
         }
-
+        
+        /// <inheritdoc cref="IResponseRequestChannel.UnregisterListener"/>
         public void UnregisterListener(IResponseListener listener)
         {
             this.onResponseListeners.Remove(listener);
         }
 
+        /// <inheritdoc cref="IResetRequestChannel.RegisterListener"/>
         public void RegisterListener(IResetListener listener)
         {
             this.onResetListeners.Add(listener);
         }
 
+        /// <inheritdoc cref="IResetRequestChannel.UnregisterListener"/>
         public void UnregisterListener(IResetListener listener)
         {
             this.onResetListeners.Remove(listener);

@@ -15,7 +15,7 @@ namespace OregoFramework.App
         }
 
         /// <summary>
-        ///     <para>Called before sending request.</para>
+        ///     <para>Called before sending a request.</para>
         /// </summary>
         protected virtual IEnumerator OnBeforeRequest(RequestTask request)
         {
@@ -23,7 +23,7 @@ namespace OregoFramework.App
         }
 
         /// <summary>
-        ///     <para>Called after request has been sent.</para>
+        ///     <para>Called after a request has sent.</para>
         /// </summary>
         protected virtual IEnumerator OnAfterRequest(RequestTask request)
         {

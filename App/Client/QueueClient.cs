@@ -31,6 +31,9 @@ namespace OregoFramework.App
             return this.channel;
         }
 
+        /// <summary>
+        ///     <para>Creates an instance of queue request channel.</para>
+        /// </summary>
         protected abstract QueueRequestChannel CreateQueueChannel();
 
         protected sealed override void OnCreate(BaseClient<T> _)

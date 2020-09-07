@@ -5,24 +5,34 @@ using UnityEngine;
 
 namespace OregoFramework.App
 {
+    /// <summary>
+    ///     <para>A base class with queue request mechanism.</para>
+    /// </summary>
     public abstract class QueueRequestChannel : BaseRequestChannel, IQueueRequestChannel
     {
-        private readonly Queue<RequestTask> requestTaskQueue;
+        /// <summary>
+        ///     <para>Request queue.</para>
+        /// </summary>
+        private readonly Queue<RequestTask> requestQueue;
 
-        private RequestTask currentRequestTask;
+        /// <summary>
+        /// <para>Sending request.</para>
+        /// </summary>
+        private RequestTask currentRequest;
 
         protected QueueRequestChannel()
         {
-            this.requestTaskQueue = new Queue<RequestTask>();
+            this.requestQueue = new Queue<RequestTask>();
         }
 
         #region Enqueue
 
+        /// <inheritdoc cref="IQueueRequestChannel.Enqueue"/>
         public IEnumerator Enqueue(RequestTask request)
         {
-            if (this.currentRequestTask != null)
+            if (this.currentRequest != null)
             {
-                this.requestTaskQueue.Enqueue(request);
+                this.requestQueue.Enqueue(request);
                 yield return new WaitWhile(request.IsPending);
                 if (!request.IsProcessing())
                 {
@@ -30,17 +40,17 @@ namespace OregoFramework.App
                 }
             }
 
-            this.currentRequestTask = request;
+            this.currentRequest = request;
             yield return this.Send(request);
             request.SetFinished();
-            if (this.requestTaskQueue.IsNotEmpty())
+            if (this.requestQueue.IsNotEmpty())
             {
-                var nextRequest = this.requestTaskQueue.Dequeue();
+                var nextRequest = this.requestQueue.Dequeue();
                 nextRequest.SetProcessing();
             }
             else
             {
-                this.currentRequestTask = null;
+                this.currentRequest = null;
             }
         }
 
@@ -56,19 +66,19 @@ namespace OregoFramework.App
 
         private void CancelRequests()
         {
-            if (this.currentRequestTask == null)
+            if (this.currentRequest == null)
             {
                 return;
             }
 
-            this.currentRequestTask.SetCanceled();
-            while (this.requestTaskQueue.IsNotEmpty())
+            this.currentRequest.SetCanceled();
+            while (this.requestQueue.IsNotEmpty())
             {
-                var request = this.requestTaskQueue.Dequeue();
+                var request = this.requestQueue.Dequeue();
                 request.SetCanceled();
             }
 
-            this.currentRequestTask = null;
+            this.currentRequest = null;
         }
 
         protected virtual void OnReset(QueueRequestChannel _)
