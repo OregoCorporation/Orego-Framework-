@@ -1,0 +1,32 @@
+using System.Collections;
+using UnityEngine.Networking;
+
+namespace OregoFramework.App
+{
+    /// <summary>
+    ///     <para>Sends web requests.</para>
+    /// </summary>
+    public abstract class BaseRequestController : RequestController<IBaseClient>
+    {
+        protected IRequestChannel channel { get; private set; }
+
+        protected sealed override void OnPrepare(RequestController<IBaseClient> _)
+        {
+            this.channel = this.client.channel;
+            this.OnPrepare(this);
+        }
+
+        protected virtual void OnPrepare(BaseRequestController _)
+        {
+        }
+
+        /// <summary>
+        ///     <para>Send unity web request asynchronously.</para>
+        /// </summary>
+        protected IEnumerator Send(UnityWebRequest webRequest)
+        {
+            var requestTask = new RequestTask(webRequest);
+            yield return this.channel.Send(requestTask);
+        }
+    }
+}
