@@ -3,7 +3,10 @@ using OregoFramework.Unit;
 
 namespace OregoFramework.App
 {
-    public abstract class EncryptablePrefsDao<T> : PrefsDao<T>
+    /// <summary>
+    ///     <para>Player prefs data access object with security mechanism.</para>
+    /// </summary>
+    public abstract class EncryptablePrefsDao : PrefsDao
     {
         protected virtual string hash { get; private set; }
 
@@ -13,21 +16,21 @@ namespace OregoFramework.App
             this.OnCreate(this);
         }
 
-        protected virtual void OnCreate(EncryptablePrefsDao<T> _)
+        protected virtual void OnCreate(EncryptablePrefsDao _)
         {
         }
 
-        protected override string SerializeEntity(T entity)
+        protected sealed override string SerializeEntity<T>(T entity)
         {
             var serializedEntity = base.SerializeEntity(entity);
             var encryptedEntity = Security.Encrypt(serializedEntity, this.hash);
             return encryptedEntity;
         }
 
-        protected override T DeserializeEntity(string stringData)
+        protected sealed override T DeserializeEntity<T>(string stringData)
         {
             var decryptedEntity = Security.Decrypt(stringData, this.hash);
-            var deserializedEntity = base.DeserializeEntity(decryptedEntity);
+            var deserializedEntity = base.DeserializeEntity<T>(decryptedEntity);
             return deserializedEntity;
         }
     }

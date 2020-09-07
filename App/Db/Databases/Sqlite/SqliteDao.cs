@@ -18,12 +18,16 @@ namespace OregoFramework.App
         private const char OPENING_PARENTHESIS = '(';
 
         #endregion
-        
+
+        /// <summary>
+        ///     <para>A connection to sqlite database.</para>
+        /// </summary>
         protected DbConnection connection
         {
-            get { return this.parentDatabase.connection; }
+            get { return this.database.connection; }
         }
 
+        /// <inheritdoc cref="ISqliteDao.OnConnect"/>
         public virtual IEnumerator OnConnect()
         {
             yield break;
@@ -31,6 +35,12 @@ namespace OregoFramework.App
 
         #region Execute
 
+        /// <summary>
+        ///     <para>Execute a query synchronously.</para>
+        /// </summary>
+        /// 
+        /// <param name="commandText">Query request.</param>
+        /// <param name="func">Query function.</param>
         protected void Execute(string commandText, Action<DbCommand> func)
         {
             using (var command = connection.CreateCommand())
@@ -40,6 +50,12 @@ namespace OregoFramework.App
             }
         }
 
+        /// <summary>
+        ///     <para>Execute a query asynchronously.</para>
+        /// </summary>
+        /// 
+        /// <param name="commandText">Query request.</param>
+        /// <param name="asyncFunc">Query function.</param>
         protected IEnumerator Execute(string commandText, Func<DbCommand, Task> asyncFunc)
         {
             var command = this.connection.CreateCommand();
@@ -52,10 +68,15 @@ namespace OregoFramework.App
                     .ContinueWith(it => command.Dispose());
             });
         }
+
         #endregion
 
         #region SerializeEntity
 
+        //TODO: FIX!!!
+        /// <summary>
+        ///     <para>Converts entities to sqlite properties.</para>
+        /// </summary>
         protected string SerializeEntities<T>(T[] entities, Func<T, object[]> transformFunc)
         {
             var stringBuilder = new StringBuilder();
@@ -73,7 +94,9 @@ namespace OregoFramework.App
             return @$"{stringBuilder}";
         }
 
-        //TODO: FIX!!!
+        /// <summary>
+        ///     <para>Converts entity properties to sqlite parameters.</para>
+        /// </summary>
         protected string SerializeEntity(params object[] parameters)
         {
             var stringBuilder = new StringBuilder();

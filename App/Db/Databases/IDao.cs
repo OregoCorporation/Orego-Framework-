@@ -3,8 +3,8 @@ using Elementary;
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>Base interface of data access object.</para>
-    ///     <para>Provides quieries to database api.</para>
+    ///     <para>Data access object interface.</para>
+    ///     <para>Each dao does quieries of one case.</para>
     /// </summary>
     public interface IDao : IElement
     {

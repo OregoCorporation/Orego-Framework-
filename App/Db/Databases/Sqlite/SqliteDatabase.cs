@@ -15,39 +15,59 @@ namespace OregoFramework.App
 {
     public abstract class SqliteDatabase : Database<ISqliteDao>
     {
+        /// <summary>
+        ///     <para>A connection to sqlite database.</para>
+        /// </summary>
         public DbConnection connection { get; private set; }
 
+        /// <summary>
+        ///     <para>URI database connection.</para>
+        /// </summary>
         protected string connectionUri { get; private set; }
 
+        /// <summary>
+        ///     <para>Path to database.</para>
+        /// </summary>
         protected string dataPath { get; private set; }
 
+        /// <summary>
+        ///     <para>Application platform.</para>
+        /// </summary>
         protected RuntimePlatform platform { get; private set; }
 
+        /// <summary>
+        ///     <para>Path to application resources.</para>
+        /// </summary>
         protected string persistentDataPath { get; private set; }
 
+        /// <summary>
+        ///     <para>Database file name.</para>
+        /// </summary>
         protected abstract string databaseName { get; }
 
         public bool isInitialized { get; private set; }
 
-        public override void OnCreate(IElementContext context)
+        protected sealed override void OnCreate(ElementLayer<ISqliteDao> _, IElementContext context)
         {
-            base.OnCreate(context);
             this.dataPath = UnityEngine.Application.dataPath;
             this.platform = UnityEngine.Application.platform;
             this.persistentDataPath = UnityEngine.Application.persistentDataPath;
             this.OnCreate(this);
         }
 
-        protected virtual void OnCreate(SqliteDatabase self)
+        protected virtual void OnCreate(SqliteDatabase _)
         {
         }
 
         #region Init
 
+        /// <summary>
+        ///     <para>Initializes this database state.</para>
+        /// </summary>
         public void Initialize()
         {
             string databasePath;
-            if (platform == RuntimePlatform.Android)
+            if (this.platform == RuntimePlatform.Android)
             {
                 this.InitAsAndroid(out databasePath);
             }
@@ -83,6 +103,9 @@ namespace OregoFramework.App
 
         #region Connect
 
+        /// <summary>
+        ///     <para>Connects to sqlite database.</para>
+        /// </summary>
         public IEnumerator Connect()
         {
             if (!this.isInitialized)
@@ -113,6 +136,9 @@ namespace OregoFramework.App
 
         #endregion
 
+        /// <summary>
+        ///     <para>Interrupts the connection with sqlite database.</para>
+        /// </summary>
         public void Disconnect()
         {
             this.connection.Close();

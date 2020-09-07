@@ -4,11 +4,8 @@ using Elementary;
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>Default implementation of database layer.</para>
-    ///     <para>This class type will added automatically by framework because
-    ///     the class has attribute <see cref="Using"/>.</para>
-    ///     <para><see cref="ApplicationFrame"/> uses this database layer by default.</para>
-    /// </summary>
+    ///     <para>A database layer class.</para>
+    /// </summary> 
     [Using]
     public class DatabaseLayer : ElementLayer<IDatabase>, IDatabaseLayer
     {
@@ -24,11 +21,13 @@ namespace OregoFramework.App
         {
         }
 
+        /// <inheritdoc cref="IDatabaseLayer.GetDatabase{T}"/>
         public T GetDatabase<T>() where T : IDatabase
         {
             return this.GetElement<T>();
         }
-
+        
+        /// <inheritdoc cref="IDatabaseLayer.GetDatabases{T}"/>
         public IEnumerable<T> GetDatabases<T>() where T : IDatabase
         {
             return this.GetElements<T>();

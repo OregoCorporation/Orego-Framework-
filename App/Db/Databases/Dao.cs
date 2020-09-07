@@ -3,19 +3,35 @@ using Elementary;
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>Base abstract data access object implementation.</para>
+    ///     <para>Data access object class</para>
     /// </summary>
-    public abstract class Dao<T> : Element, IDao where T : IDatabase
+    public abstract class Dao : Element, IDao
     {
         protected IApplicationFrame applicationFrame { get; private set; }
-
-        protected T database { get; private set; }
 
         protected sealed override void OnPrepare(Element _)
         {
             this.applicationFrame = this.GetRootElement<IApplicationFrame>();
-            var databaseLayer = this.applicationFrame.databaseLayer;
-            this.database = databaseLayer.GetDatabase<T>();
+            this.OnPrepare(this);
+        }
+
+        protected virtual void OnPrepare(Dao _)
+        {
+        }
+    }
+
+    /// <summary>
+    ///     <para>Data access object with database.</para>
+    /// </summary>
+    /// 
+    /// <typeparam name="T">Type of parent database.</typeparam>
+    public abstract class Dao<T> : Dao where T : IDatabase
+    {
+        protected T database { get; private set; }
+
+        protected sealed override void OnPrepare(Dao _)
+        {
+            this.database = this.applicationFrame.databaseLayer.GetDatabase<T>();
             this.OnPrepare(this);
         }
 

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OregoFramework.App
 {
+    /// <summary>
+    ///     <para>Utils.</para>
+    /// </summary>
     public static class SqliteUtils
     {
         public static void ReadSync(this DbCommand command, Action<DbDataReader> onRead)

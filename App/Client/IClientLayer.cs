@@ -5,6 +5,7 @@ namespace OregoFramework.App
 {
     /// <summary>
     ///     <para>A client layer interface.</para>
+    ///     <para>Contains client with different types.</para>
     /// </summary>
     public interface IClientLayer : IElement
     {

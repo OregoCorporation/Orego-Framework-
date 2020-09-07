@@ -4,22 +4,19 @@ using Elementary;
 namespace OregoFramework.App
 {
     /// <summary>
-    /// <para>Base interface that contains set of different types of database.</para>
+    ///     <para>A database layer interface.</para>
+    ///     <para>Contains databases with different types.</para>
     /// </summary>
     public interface IDatabaseLayer : IElement
     {
         /// <summary>
-        ///     <para>Gets required database by type.</para>
+        ///     <para>Returns a required database of "T" type.</para>
         /// </summary>
-        /// <typeparam name="T">Required type.</typeparam>
-        /// <returns>Required database reference.</returns>
         T GetDatabase<T>() where T : IDatabase;
         
         /// <summary>
-        ///     <para>Gets required database set by type.</para>
+        ///     <para>Returns required databases of "T" type.</para>
         /// </summary>
-        /// <typeparam name="T">Required type.</typeparam>
-        /// <returns>Required database set.</returns>
         IEnumerable<T> GetDatabases<T>() where T : IDatabase;
     }
 }
