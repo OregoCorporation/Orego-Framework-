@@ -14,6 +14,11 @@ namespace OregoFramework.App
 
         #endregion
 
+        /// <summary>
+        ///     <para>A session started or not.</para>
+        /// </summary>
+        public bool isActiveSession { get; protected set; }
+
         protected AsyncRepositoryLayer()
         {
             this.OnBeginSessionEvent = new AsyncEvent();

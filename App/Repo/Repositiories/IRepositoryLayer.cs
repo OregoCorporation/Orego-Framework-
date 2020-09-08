@@ -3,22 +3,19 @@ using System.Collections.Generic;
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>Base interface of repository layer.</para>
+    ///     <para>Repository layer interface.</para>
+    ///     <para>Keeps dictionary of unique repositories <see cref="IRepository"/>.</para>
     /// </summary>
     public interface IRepositoryLayer : IRepoElement
     {
         /// <summary>
-        ///     <para>Gets required repository by type.</para>
+        ///     <para>Returns a required repository of "T" type.</para>
         /// </summary>
-        /// <typeparam name="T">Required type.</typeparam>
-        /// <returns>Instance of required type.</returns>
         T GetRepository<T>() where T : IRepository;
 
         /// <summary>
-        ///     <para>Gets required repositories by type.</para>
+        ///     <para>Returns a required repositories of "T" type.</para>
         /// </summary>
-        /// <typeparam name="T">Required type.</typeparam>
-        /// <returns>Repositories of required type.</returns>
         IEnumerable<T> GetRepositories<T>() where T : IRepository;
     }
 }

@@ -2,9 +2,7 @@ using Elementary;
 
 namespace OregoFramework.App
 {
-    /// <summary>
-    ///     <para>Controller for work with data.</para>
-    /// </summary>
+    /// <inheritdoc cref="IRepoElement"/>
     public abstract class RepoElement : Element, IRepoElement
     {
         protected IApplicationFrame applicationFrame { get; private set; }
@@ -27,11 +25,13 @@ namespace OregoFramework.App
         {
         }
 
+        /// <inheritdoc cref="IDatabaseLayer.GetDatabase{T}"/>
         protected T GetDatabase<T>() where T : IDatabase
         {
             return this.databaseLayer.GetDatabase<T>();
         }
 
+        /// <inheritdoc cref="IClientLayer.GetClient{T}"/>
         protected T GetClient<T>() where T : IClient
         {
             return this.clientLayer.GetClient<T>();

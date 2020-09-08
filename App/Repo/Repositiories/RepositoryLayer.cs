@@ -12,8 +12,6 @@ namespace OregoFramework.App
     [Using]
     public class RepositoryLayer : ElementLayer<IRepository>, IRepositoryLayer
     {
-        public bool isActiveSession { get; protected set; }
-
         protected IApplicationFrame applicationFrame { get; private set; }
 
         protected IDatabaseLayer databaseLayer { get; private set; }

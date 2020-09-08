@@ -3,6 +3,10 @@ using OregoFramework.Game;
 
 namespace OregoFramework.App
 {
+    /// <summary>
+    ///     Maintains a game context.
+    /// </summary>
+    /// <typeparam name="T">Game context type.</typeparam>
     public abstract class GameplayInteractor<T> : Interactor 
         where T : IGameContext
     {

@@ -3,7 +3,7 @@ using System.Collections;
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>Channel with queue request mechanism.</para>
+    ///     <para>Channel with request queue mechanism.</para>
     /// </summary>
     public interface IQueueRequestChannel : IRequestChannel
     {

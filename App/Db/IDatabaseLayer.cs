@@ -5,7 +5,7 @@ namespace OregoFramework.App
 {
     /// <summary>
     ///     <para>A database layer interface.</para>
-    ///     <para>Contains databases with different types.</para>
+    ///     <para>Keeps dictionary of unique databases <see cref="IDatabase"/>.</para>
     /// </summary>
     public interface IDatabaseLayer : IElement
     {

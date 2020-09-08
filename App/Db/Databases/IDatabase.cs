@@ -5,6 +5,7 @@ namespace OregoFramework.App
 {
     /// <summary>
     ///     <para>Database interface.</para>
+    ///     <para>Keeps dictionary of unique data access objects (DAO) <see cref="IDao"/>.</para>
     /// </summary>
     public interface IDatabase : IElement
     {
