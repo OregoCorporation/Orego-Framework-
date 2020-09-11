@@ -3,12 +3,7 @@ using Elementary;
 
 namespace OregoFramework.App
 {
-    /// <summary>
-    ///     <para>Default implementation of repository layer.</para>
-    ///     <para>This class type will added automatically by framework because
-    ///     the class has attribute <see cref="Using"/>.</para>
-    ///     <para><see cref="ApplicationFrame"/> uses this repository layer by default.</para>
-    /// </summary>
+    /// <inheritdoc cref="IRepositoryLayer"/>
     [Using]
     public class RepositoryLayer : ElementLayer<IRepository>, IRepositoryLayer
     {
@@ -30,12 +25,13 @@ namespace OregoFramework.App
         {
         }
 
-
+        /// <inheritdoc cref="IRepositoryLayer.GetRepository{T}"/>
         public T GetRepository<T>() where T : IRepository
         {
             return this.GetElement<T>();
         }
 
+        /// <inheritdoc cref="IRepositoryLayer.GetRepositories{T}"/>
         public IEnumerable<T> GetRepositories<T>() where T : IRepository
         {
             return this.GetElements<T>();

@@ -2,6 +2,9 @@ using System.Collections;
 
 namespace OregoFramework.App
 {
+    /// <summary>
+    ///     <para>Observes response listeners</para>
+    /// </summary>
     public interface IResponseRequestChannel : IRequestChannel
     {
         /// <summary>

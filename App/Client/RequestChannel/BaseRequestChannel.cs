@@ -11,8 +11,14 @@ namespace OregoFramework.App
         IResponseRequestChannel,
         IResetRequestChannel
     {
+        /// <summary>
+        ///     <para>Registered response listener references.</para>
+        /// </summary>
         private readonly HashSet<IResponseListener> onResponseListeners;
 
+        /// <summary>
+        ///     <para>Registered reset listener references.</para>
+        /// </summary>
         private readonly HashSet<IResetListener> onResetListeners;
 
         protected BaseRequestChannel()

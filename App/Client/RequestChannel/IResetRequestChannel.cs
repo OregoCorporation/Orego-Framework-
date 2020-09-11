@@ -1,7 +1,8 @@
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>Channel with reset listeners.</para>
+    ///     <para>Observes reset listeners.</para>
+    ///     <para>Can reset its state.</para>
     /// </summary>
     public interface IResetRequestChannel : IRequestChannel
     {

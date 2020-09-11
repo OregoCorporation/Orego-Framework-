@@ -3,7 +3,7 @@ using System.Collections;
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>Sends a request on low level.</para>
+    ///     <para>Sends requests on low level.</para>
     /// </summary>
     public interface IRequestChannel
     {

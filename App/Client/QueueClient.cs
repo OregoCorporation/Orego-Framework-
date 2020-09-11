@@ -9,7 +9,7 @@ namespace OregoFramework.App
     public abstract class QueueClient<T> : BaseClient<T> where T : BaseRequestController
     {
         /// <summary>
-        ///     <para>Queue request channel.</para>
+        ///     <para>A request channel with queue.</para>
         /// </summary>
         protected new QueueRequestChannel channel { get; private set; }
 

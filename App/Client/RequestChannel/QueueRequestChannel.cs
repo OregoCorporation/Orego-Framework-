@@ -11,7 +11,7 @@ namespace OregoFramework.App
     public abstract class QueueRequestChannel : BaseRequestChannel, IQueueRequestChannel
     {
         /// <summary>
-        ///     <para>Request queue.</para>
+        ///     <para>Queue of pending requests.</para>
         /// </summary>
         private readonly Queue<RequestTask> requestQueue;
 

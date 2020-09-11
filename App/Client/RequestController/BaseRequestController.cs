@@ -8,6 +8,9 @@ namespace OregoFramework.App
     /// </summary>
     public abstract class BaseRequestController : RequestController<IBaseClient>
     {
+        /// <summary>
+        ///     <para>A channel reference.</para>
+        /// </summary>
         protected IRequestChannel channel { get; private set; }
 
         protected sealed override void OnPrepare(RequestController<IBaseClient> _)
@@ -21,7 +24,7 @@ namespace OregoFramework.App
         }
 
         /// <summary>
-        ///     <para>Send unity web request asynchronously.</para>
+        ///     <para>Send unity web request via channel asynchronously.</para>
         /// </summary>
         protected IEnumerator Send(UnityWebRequest webRequest)
         {

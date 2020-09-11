@@ -3,7 +3,7 @@ using Elementary;
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>Data access object class</para>
+    ///     <para>Data access object class.</para>
     /// </summary>
     public abstract class Dao : Element, IDao
     {

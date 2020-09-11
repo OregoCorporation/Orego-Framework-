@@ -5,10 +5,12 @@ using UnityEngine.Networking;
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>Sends web request via queue.</para>
+    ///     <para>Sends web request via queue channel.</para>
+    ///     <para>Required <see cref="QueueRequestChannel"/> in client.</para>
     /// </summary>
     public abstract class QueueRequestController : BaseRequestController
     {
+        /// <inheritdoc cref="BaseRequestController.channel"/>
         protected new QueueRequestChannel channel { get; private set; }
 
         protected sealed override void OnPrepare(BaseRequestController _)
@@ -22,7 +24,7 @@ namespace OregoFramework.App
         }
 
         /// <summary>
-        ///     <para>Send unity web request asynchronously via request queue.</para>
+        ///     <para>Send unity web request asynchronously via queue channel.</para>
         /// </summary>
         protected IEnumerator Enqueue(UnityWebRequest request)
         {

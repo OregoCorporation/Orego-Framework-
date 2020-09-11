@@ -3,7 +3,7 @@ using UnityEngine.Networking;
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     Unity web request wrapper with state.
+    ///     Unity web request with state.
     /// </summary>
     public sealed class RequestTask
     {

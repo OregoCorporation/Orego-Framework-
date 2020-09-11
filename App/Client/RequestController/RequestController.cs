@@ -7,8 +7,14 @@ namespace OregoFramework.App
     /// </summary>
     public abstract class RequestController<T> : Element, IRequestController where T : IClient
     {
+        /// <summary>
+        ///     <para>An application frame reference.</para>
+        /// </summary>
         protected IApplicationFrame applicationFrame { get; private set; }
-
+        
+        /// <summary>
+        ///     <para>A parent client reference.</para>
+        /// </summary>
         protected T client { get; private set; }
 
         protected sealed override void OnPrepare(Element _)
