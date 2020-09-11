@@ -1,7 +1,8 @@
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>Repository interface.</para>
+    ///     <para>A repository interface.</para>
+    ///     <para>Each repository stores one type of data.</para>
     /// </summary>
     public interface IRepository : IRepoElement
     {

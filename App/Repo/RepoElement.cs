@@ -5,12 +5,24 @@ namespace OregoFramework.App
     /// <inheritdoc cref="IRepoElement"/>
     public abstract class RepoElement : Element, IRepoElement
     {
+        /// <summary>
+        ///     <para>An application frame reference.</para>
+        /// </summary>
         protected IApplicationFrame applicationFrame { get; private set; }
 
+        /// <summary>
+        ///     <para>A repository layer reference.</para>
+        /// </summary>
         protected IRepositoryLayer repositoryLayer { get; private set; }
 
+        /// <summary>
+        ///     <para>A database layer reference.</para>
+        /// </summary>
         protected IDatabaseLayer databaseLayer { get; private set; }
 
+        /// <summary>
+        ///     <para>A client layer reference.</para>
+        /// </summary>
         protected IClientLayer clientLayer { get; private set; }
 
         protected sealed override void OnPrepare(Element _)

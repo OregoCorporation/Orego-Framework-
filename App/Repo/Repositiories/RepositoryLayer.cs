@@ -7,10 +7,19 @@ namespace OregoFramework.App
     [Using]
     public class RepositoryLayer : ElementLayer<IRepository>, IRepositoryLayer
     {
+        /// <summary>
+        ///     <para>An application frame reference.</para>
+        /// </summary>
         protected IApplicationFrame applicationFrame { get; private set; }
 
+        /// <summary>
+        ///     <para>A database layer reference.</para>
+        /// </summary>
         protected IDatabaseLayer databaseLayer { get; private set; }
 
+        /// <summary>
+        ///     <para>A client layer reference.</para>
+        /// </summary>
         protected IClientLayer clientLayer { get; private set; }
 
         protected sealed override void OnPrepare(Element _)

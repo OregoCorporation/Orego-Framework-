@@ -3,7 +3,7 @@ using Elementary;
 
 namespace OregoFramework.App
 {
-    public abstract class UpdateVersionRepositoryLayer : AsyncRepositoryLayer
+    public abstract class UpdateVersionRepositoryLayer : SessionRepositoryLayer
     {
         public IUpdateVersionRepositoryManager updateVersionManager { get; private set; }
 

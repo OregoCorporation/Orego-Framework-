@@ -4,7 +4,7 @@ using OregoFramework.Util;
 
 namespace OregoFramework.App
 {
-    public abstract class AsyncRepositoryLayer : RepositoryLayer
+    public abstract class SessionRepositoryLayer : RepositoryLayer, ISessionRepositoryLayer
     {
         #region Event
 
@@ -19,7 +19,7 @@ namespace OregoFramework.App
         /// </summary>
         public bool isActiveSession { get; protected set; }
 
-        protected AsyncRepositoryLayer()
+        protected SessionRepositoryLayer()
         {
             this.OnBeginSessionEvent = new AsyncEvent();
             this.OnEndSessionEvent = new AsyncEvent();
@@ -32,14 +32,14 @@ namespace OregoFramework.App
             this.OnDispose(this);
         }
 
-        protected virtual void OnDispose(AsyncRepositoryLayer _)
+        protected virtual void OnDispose(SessionRepositoryLayer _)
         {
         }
 
         public IEnumerator BeginSession()
         {
             yield return this.OnBeforeBeginSession();
-            var repositories = this.GetRepositories<IAsyncRepository>();
+            var repositories = this.GetRepositories<ISessionRepository>();
             foreach (var repository in repositories)
             {
                 yield return repository.OnBeginSession();
@@ -65,7 +65,7 @@ namespace OregoFramework.App
             yield return this.OnBeforeEndSession();
             this.isActiveSession = false;
             yield return this.OnEndSessionEvent?.Invoke();
-            var repositories = this.GetRepositories<IAsyncRepository>();
+            var repositories = this.GetRepositories<ISessionRepository>();
             foreach (var repository in repositories)
             {
                 yield return repository.OnEndSession();
