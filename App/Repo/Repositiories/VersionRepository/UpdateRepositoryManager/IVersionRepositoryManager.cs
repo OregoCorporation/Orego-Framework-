@@ -2,7 +2,9 @@ using System.Collections;
 
 namespace OregoFramework.App
 {
-    public interface IUpdateVersionRepositoryManager : IRepoElement
+        
+    
+    public interface IVersionRepositoryManager : IRepoElement
     {
         IEnumerator UpdateVersionInRepositories();
     }

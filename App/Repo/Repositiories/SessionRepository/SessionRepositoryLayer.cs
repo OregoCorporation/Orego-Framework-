@@ -4,12 +4,15 @@ using OregoFramework.Util;
 
 namespace OregoFramework.App
 {
+    /// <inheritdoc cref="ISessionRepositoryLayer"/>
     public abstract class SessionRepositoryLayer : RepositoryLayer, ISessionRepositoryLayer
     {
         #region Event
-
+        
+        /// <inheritdoc cref="ISessionRepositoryLayer.OnBeginSessionEvent"/>
         public AsyncEvent OnBeginSessionEvent { get; }
 
+        /// <inheritdoc cref="ISessionRepositoryLayer.OnEndSessionEvent"/>
         public AsyncEvent OnEndSessionEvent { get; }
 
         #endregion
@@ -36,6 +39,7 @@ namespace OregoFramework.App
         {
         }
 
+        /// <inheritdoc cref="ISessionRepositoryLayer.BeginSession"/>
         public IEnumerator BeginSession()
         {
             yield return this.OnBeforeBeginSession();
@@ -60,6 +64,7 @@ namespace OregoFramework.App
             yield break;
         }
 
+        /// <inheritdoc cref="ISessionRepositoryLayer.EndSession"/>
         public IEnumerator EndSession()
         {
             yield return this.OnBeforeEndSession();

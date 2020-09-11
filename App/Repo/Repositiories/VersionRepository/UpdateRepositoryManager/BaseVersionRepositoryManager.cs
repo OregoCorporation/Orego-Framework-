@@ -3,12 +3,11 @@ using OregoFramework.Util;
 
 namespace OregoFramework.App
 {
-    public abstract class BaseUpdateVersionRepositoryManager : RepoElement,
-        IUpdateVersionRepositoryManager
+    public abstract class BaseVersionRepositoryManager : RepoElement, IVersionRepositoryManager
     {
         public IEnumerator UpdateVersionInRepositories()
         {
-            var repositories = this.repositoryLayer.GetRepositories<IUpdateVersionRepository>();
+            var repositories = this.repositoryLayer.GetRepositories<IVersionRepository>();
             var isRequiredUpdate = true;
             while (isRequiredUpdate)
             {
@@ -16,7 +15,7 @@ namespace OregoFramework.App
                 foreach (var repository in repositories)
                 {
                     var isUpdatedReference = new Reference<bool>();
-                    yield return repository.OnUpdateVersionAsync(isUpdatedReference);
+                    yield return repository.OnUpdateVersion(isUpdatedReference);
                     if (isUpdatedReference.value)
                     {
                         isRequiredUpdate = true;

@@ -6,14 +6,14 @@ using OregoFramework.Util;
 
 namespace OregoFramework.App
 {
-    using RepositorySet = HashSet<IUpdateVersionRepository>;
+    using RepositorySet = HashSet<IVersionRepository>;
         
-    public abstract class DependencyUpdateVersionRepositoryManager : RepoElement,
-        IUpdateVersionRepositoryManager
+    public abstract class DependencyVersionRepositoryManager : RepoElement,
+        IVersionRepositoryManager
     {
         private readonly Dictionary<Type, RepositorySet> dependencyRepositoryMap;
 
-        public DependencyUpdateVersionRepositoryManager()
+        public DependencyVersionRepositoryManager()
         {
             this.dependencyRepositoryMap = new Dictionary<Type, RepositorySet>();
         }
@@ -26,13 +26,13 @@ namespace OregoFramework.App
             this.OnPrepare(this);
         }
 
-        protected virtual void OnPrepare(DependencyUpdateVersionRepositoryManager _)
+        protected virtual void OnPrepare(DependencyVersionRepositoryManager _)
         {
         }
 
         private void InitDependencyMap()
         {
-            var repositories = this.repositoryLayer.GetRepositories<IUpdateVersionRepository>();
+            var repositories = this.repositoryLayer.GetRepositories<IVersionRepository>();
             foreach (var repository in repositories)
             {
                 var repositoryType = repository.GetType();
@@ -45,7 +45,7 @@ namespace OregoFramework.App
 
         public void RegisterDependency(
             Type targetRepositoryType,
-            IUpdateVersionRepository dependencyRepository
+            IVersionRepository dependencyRepository
         )
         {
             var repositoryDependencies = this.dependencyRepositoryMap[targetRepositoryType];
@@ -54,7 +54,7 @@ namespace OregoFramework.App
         
         public void UnregisterDependency(
             Type targetRepositoryType,
-            IUpdateVersionRepository dependencyRepository
+            IVersionRepository dependencyRepository
         )
         {
             var repositoryDependencies = this.dependencyRepositoryMap[targetRepositoryType];
@@ -63,13 +63,13 @@ namespace OregoFramework.App
 
         public IEnumerator UpdateVersionInRepositories()
         {
-            var repositories = this.repositoryLayer.GetRepositories<IUpdateVersionRepository>();
+            var repositories = this.repositoryLayer.GetRepositories<IVersionRepository>();
             var checkingRepositories = new RepositorySet(repositories);
             while (checkingRepositories.IsNotEmpty())
             {
                 var nextRepository = checkingRepositories.First();
                 var isUpdatedReference = new Reference<bool>();
-                yield return nextRepository.OnUpdateVersionAsync(isUpdatedReference);
+                yield return nextRepository.OnUpdateVersion(isUpdatedReference);
                 if (!isUpdatedReference.value)
                 {
                     continue;
