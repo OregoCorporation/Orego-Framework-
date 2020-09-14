@@ -7,7 +7,7 @@ namespace OregoFramework.App
     public interface IResetRequestChannel : IRequestChannel
     {
         /// <summary>
-        ///     <para>Adds a listener to this channel.</para>
+        ///     <para>Adds a listener on this channel.</para>
         /// </summary>
         void RegisterListener(IResetListener listener);
 

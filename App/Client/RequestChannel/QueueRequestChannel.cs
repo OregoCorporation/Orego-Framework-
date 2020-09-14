@@ -13,7 +13,7 @@ namespace OregoFramework.App
         /// <summary>
         ///     <para>Queue of pending requests.</para>
         /// </summary>
-        private readonly Queue<RequestTask> requestQueue;
+        private readonly Queue<RequestTask> pendingRequests;
 
         /// <summary>
         /// <para>Sending request.</para>
@@ -22,17 +22,15 @@ namespace OregoFramework.App
 
         protected QueueRequestChannel()
         {
-            this.requestQueue = new Queue<RequestTask>();
+            this.pendingRequests = new Queue<RequestTask>();
         }
 
-        #region Enqueue
-
-        /// <inheritdoc cref="IQueueRequestChannel.Enqueue"/>
-        public IEnumerator Enqueue(RequestTask request)
+        /// <inheritdoc cref="IQueueRequestChannel.EnqueueRequest"/>
+        public IEnumerator EnqueueRequest(RequestTask request)
         {
             if (this.currentRequest != null)
             {
-                this.requestQueue.Enqueue(request);
+                this.pendingRequests.Enqueue(request);
                 yield return new WaitWhile(request.IsPending);
                 if (!request.IsProcessing())
                 {
@@ -41,11 +39,11 @@ namespace OregoFramework.App
             }
 
             this.currentRequest = request;
-            yield return this.Send(request);
+            yield return this.SendRequest(request);
             request.SetFinished();
-            if (this.requestQueue.IsNotEmpty())
+            if (this.pendingRequests.IsNotEmpty())
             {
-                var nextRequest = this.requestQueue.Dequeue();
+                var nextRequest = this.pendingRequests.Dequeue();
                 nextRequest.SetProcessing();
             }
             else
@@ -54,17 +52,13 @@ namespace OregoFramework.App
             }
         }
 
-        #endregion
-
-        #region Reset
-
         protected sealed override void OnReset(BaseRequestChannel _)
         {
-            this.CancelRequests();
+            this.CancelAllRequests();
             this.OnReset(this);
         }
 
-        private void CancelRequests()
+        private void CancelAllRequests()
         {
             if (this.currentRequest == null)
             {
@@ -72,9 +66,9 @@ namespace OregoFramework.App
             }
 
             this.currentRequest.SetCanceled();
-            while (this.requestQueue.IsNotEmpty())
+            while (this.pendingRequests.IsNotEmpty())
             {
-                var request = this.requestQueue.Dequeue();
+                var request = this.pendingRequests.Dequeue();
                 request.SetCanceled();
             }
 
@@ -84,7 +78,5 @@ namespace OregoFramework.App
         protected virtual void OnReset(QueueRequestChannel _)
         {
         }
-
-        #endregion
     }
 }

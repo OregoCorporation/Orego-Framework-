@@ -6,18 +6,18 @@ namespace OregoFramework.App
     /// <inheritdoc cref="IRequestChannel"/>
     public abstract class RequestChannel : Element, IRequestChannel
     {
-        /// <inheritdoc cref="IRequestChannel.Send"/>
-        public IEnumerator Send(RequestTask request)
+        /// <inheritdoc cref="IRequestChannel.SendRequest"/>
+        public IEnumerator SendRequest(RequestTask request)
         {
-            yield return OnBeforeRequest(request);
+            yield return OnBeforeSendRequest(request);
             yield return request.unityWebRequest.SendWebRequest();
-            yield return this.OnAfterRequest(request);
+            yield return this.OnAfterSendRequest(request);
         }
 
         /// <summary>
         ///     <para>Called before sending a request.</para>
         /// </summary>
-        protected virtual IEnumerator OnBeforeRequest(RequestTask request)
+        protected virtual IEnumerator OnBeforeSendRequest(RequestTask request)
         {
             yield break;
         }
@@ -25,7 +25,7 @@ namespace OregoFramework.App
         /// <summary>
         ///     <para>Called after a request has sent.</para>
         /// </summary>
-        protected virtual IEnumerator OnAfterRequest(RequestTask request)
+        protected virtual IEnumerator OnAfterSendRequest(RequestTask request)
         {
             yield break;
         }

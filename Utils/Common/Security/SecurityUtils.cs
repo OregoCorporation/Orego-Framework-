@@ -2,9 +2,9 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace OregoFramework.Unit
+namespace OregoFramework.Util
 {
-    public static class Security
+    public static class SecurityUtils
     {
         public static string Encrypt(string input, string hash)
         {

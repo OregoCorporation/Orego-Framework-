@@ -26,10 +26,10 @@ namespace OregoFramework.App
         /// <summary>
         ///     <para>Send unity web request asynchronously via queue channel.</para>
         /// </summary>
-        protected IEnumerator Enqueue(UnityWebRequest request)
+        protected IEnumerator EnqueueRequest(UnityWebRequest request)
         {
             var requestTask = new RequestTask(request);
-            yield return this.channel.Enqueue(requestTask);
+            yield return this.channel.EnqueueRequest(requestTask);
         }
     }
 }

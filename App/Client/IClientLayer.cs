@@ -10,7 +10,7 @@ namespace OregoFramework.App
     public interface IClientLayer : IElement
     {
         /// <summary>
-        ///     <para>Returns required client of "T" type.</para>
+        ///     <para>Returns a required client of "T" type.</para>
         /// </summary>
         T GetClient<T>() where T : IClient;
 

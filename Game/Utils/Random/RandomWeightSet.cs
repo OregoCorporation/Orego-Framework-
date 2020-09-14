@@ -4,6 +4,10 @@ using System.Linq;
 
 namespace OregoFramework.Util
 {
+    /// <summary>
+    ///     <para>Experimental.</para>
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public sealed class RandomWeightSet<T>
     {
         private readonly Random random;

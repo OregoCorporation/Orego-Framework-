@@ -1,20 +1,20 @@
 using System;
+using UnityEngine;
 
 namespace OregoFramework.Util
 {
-    public sealed class ObservableData<T> : IDisposable
+    [Serializable]
+    public sealed class ObservableData<T>
     {
-        #region Event
+        public delegate void ValueChangedHandler(object sender, ObservableData<T> self, T value);
 
-        public AutoEvent<object, ObservableData<T>, T> OnValueChangedEvent { get; }
+        public event ValueChangedHandler OnValueChangedEvent;
 
-        #endregion
-
-        public T value { get; private set; }
+        [SerializeField]
+        private T value;
 
         public ObservableData()
         {
-            this.OnValueChangedEvent = new AutoEvent<object, ObservableData<T>, T>();
         }
 
         public ObservableData(T value) : this()
@@ -22,15 +22,15 @@ namespace OregoFramework.Util
             this.value = value;
         }
 
+        public T GetValue()
+        {
+            return this.value;
+        }
+        
         public void SetValue(object sender, T value)
         {
             this.value = value;
             this.OnValueChangedEvent?.Invoke(sender, this, value);
-        }
-
-        public void Dispose()
-        {
-            this.OnValueChangedEvent?.Dispose();
         }
     }
 }

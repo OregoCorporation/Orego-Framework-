@@ -9,8 +9,11 @@ namespace OregoFramework.App
     [Using]
     public class DatabaseLayer : ElementLayer<IDatabase>, IDatabaseLayer
     {
+        /// <summary>
+        ///     <para>An application frame reference.</para>
+        /// </summary>
         protected IApplicationFrame applicationFrame { get; private set; }
-
+        
         protected sealed override void OnPrepare(Element _)
         {
             this.applicationFrame = this.GetRootElement<IApplicationFrame>();

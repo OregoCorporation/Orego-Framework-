@@ -1,10 +1,10 @@
 using Elementary;
-using OregoFramework.Unit;
+using OregoFramework.Util;
 
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>Player prefs data access object with security mechanism.</para>
+    ///     <para>Player prefs data access object with data encryption.</para>
     /// </summary>
     public abstract class EncryptablePrefsDao : PrefsDao
     {
@@ -23,13 +23,13 @@ namespace OregoFramework.App
         protected sealed override string SerializeEntity<T>(T entity)
         {
             var serializedEntity = base.SerializeEntity(entity);
-            var encryptedEntity = Security.Encrypt(serializedEntity, this.hash);
+            var encryptedEntity = SecurityUtils.Encrypt(serializedEntity, this.hash);
             return encryptedEntity;
         }
 
         protected sealed override T DeserializeEntity<T>(string stringData)
         {
-            var decryptedEntity = Security.Decrypt(stringData, this.hash);
+            var decryptedEntity = SecurityUtils.Decrypt(stringData, this.hash);
             var deserializedEntity = base.DeserializeEntity<T>(decryptedEntity);
             return deserializedEntity;
         }

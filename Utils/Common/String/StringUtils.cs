@@ -5,13 +5,9 @@ namespace OregoFramework.Util
 {
     public static class StringUtils
     {
-        #region Const
-
         private static readonly Random RANDOM = new Random();
 
         private const string CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-        #endregion
 
         public static bool IsNotEmpty(this string str)
         {

@@ -8,6 +8,9 @@ namespace OregoFramework.App
     /// </summary>
     public abstract class Database<T> : ElementLayer<T>, IDatabase where T : IDao
     {
+        /// <summary>
+        ///     <para>An application frame reference.</para>
+        /// </summary>
         protected IApplicationFrame applicationFrame { get; private set; }
 
         protected sealed override void OnPrepare(Element _)

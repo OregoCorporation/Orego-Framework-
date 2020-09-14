@@ -9,6 +9,9 @@ using OregoFramework.Util;
 
 namespace OregoFramework.App
 {
+    /// <summary>
+    /// <inheritdoc cref="ISqliteDao"/>
+    /// </summary>
     public abstract class SqliteDao : Dao<SqliteDatabase>, ISqliteDao
     {
         #region Const

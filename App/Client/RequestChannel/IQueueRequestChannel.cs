@@ -12,6 +12,6 @@ namespace OregoFramework.App
         /// </summary>
         /// 
         /// <param name="request">A request instance.</param>
-        IEnumerator Enqueue(RequestTask request);
+        IEnumerator EnqueueRequest(RequestTask request);
     }
 }

@@ -9,7 +9,7 @@ namespace OregoFramework.App
     public abstract class BaseRequestController : RequestController<IBaseClient>
     {
         /// <summary>
-        ///     <para>A channel reference.</para>
+        ///     <para>A client channel reference.</para>
         /// </summary>
         protected IRequestChannel channel { get; private set; }
 
@@ -26,10 +26,10 @@ namespace OregoFramework.App
         /// <summary>
         ///     <para>Send unity web request via channel asynchronously.</para>
         /// </summary>
-        protected IEnumerator Send(UnityWebRequest webRequest)
+        protected IEnumerator SendRequest(UnityWebRequest webRequest)
         {
             var requestTask = new RequestTask(webRequest);
-            yield return this.channel.Send(requestTask);
+            yield return this.channel.SendRequest(requestTask);
         }
     }
 }

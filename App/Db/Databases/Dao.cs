@@ -7,6 +7,9 @@ namespace OregoFramework.App
     /// </summary>
     public abstract class Dao : Element, IDao
     {
+        /// <summary>
+        ///     <para>An application frame reference.</para>
+        /// </summary>
         protected IApplicationFrame applicationFrame { get; private set; }
 
         protected sealed override void OnPrepare(Element _)
@@ -27,6 +30,9 @@ namespace OregoFramework.App
     /// <typeparam name="T">Type of parent database.</typeparam>
     public abstract class Dao<T> : Dao where T : IDatabase
     {
+        /// <summary>
+        ///     <para>A parent database reference.</para>
+        /// </summary>
         protected T database { get; private set; }
 
         protected sealed override void OnPrepare(Dao _)
