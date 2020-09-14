@@ -4,11 +4,11 @@ using Elementary;
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>Base item interactor class.</para>
+    ///     <para>A base item interactor class.</para>
     /// </summary>
     /// 
     /// <typeparam name="T">An item type.</typeparam>
-    /// <typeparam name="TRepository">Target repository.</typeparam>
+    /// <typeparam name="TRepository">Target repository type.</typeparam>
     /// <typeparam name="TData">Loaded data type.</typeparam>
     public abstract class ItemInteractor<T, TRepository, TData> : Interactor,
         IItemInteractor<T>

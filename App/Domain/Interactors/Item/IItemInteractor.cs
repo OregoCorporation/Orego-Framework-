@@ -14,7 +14,7 @@ namespace OregoFramework.App
         /// </summary>
         /// 
         /// <param name="sender">Who is calling this method</param>
-        /// <param name="item"></param>
+        /// <param name="item">An item reference.</param>
         event Action<object, T> OnItemChangedEvent;
 
        /// <summary>
@@ -22,8 +22,8 @@ namespace OregoFramework.App
        ///     <para>Insert event invokation <see cref="OnItemChangedEvent"/> into body of this method.</para>
        /// </summary>
        /// 
-       /// <param name="sender">Who is calling this method</param>
-       /// <param name="item"></param>
+       /// <param name="sender">Who is calling this method.</param>
+       /// <param name="item">An item reference.</param>
         void NotifyAboutItemChanged(object sender, T item);
     }
 }

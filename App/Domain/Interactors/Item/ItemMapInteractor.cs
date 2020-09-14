@@ -4,11 +4,11 @@ using System.Linq;
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>Base item map interactor.</para>
+    ///     <para>An item map interactor class.</para>
     /// </summary>
     /// <typeparam name="K">Dictionary key.</typeparam>
     /// <typeparam name="T">Dictionary value.</typeparam>
-    /// <typeparam name="TRepository">Target repository.</typeparam>
+    /// <typeparam name="TRepository">Target repository type.</typeparam>
     /// <typeparam name="TData">Loaded data type.</typeparam>
     public abstract class ItemMapInteractor<K, T, TRepository, TData> :
         ItemInteractor<T, TRepository, IEnumerable<TData>>,
