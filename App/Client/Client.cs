@@ -6,7 +6,7 @@ namespace OregoFramework.App
     /// <summary>
     ///     <para>Abstract client class.</para>
     /// </summary>
-    /// <typeparam name="T">Requred caller type.</typeparam>
+    /// <typeparam name="T">Keeps a dictionary of unique request controllers with "T" type.</typeparam>
     public abstract class Client<T> : ElementLayer<T>, IClient where T : IRequestController
     {
         /// <inheritdoc cref="IClient.GetController{T}"/>

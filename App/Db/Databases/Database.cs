@@ -6,6 +6,7 @@ namespace OregoFramework.App
     /// <summary>
     ///     <para>A Base database class.</para>
     /// </summary>
+    /// <typeparam name="T">Keeps unique data access objects (DAO) of "T" type.</typeparam>
     public abstract class Database<T> : ElementLayer<T>, IDatabase where T : IDao
     {
         /// <summary>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>Repository layer interface.</para>
+    ///     <para>A repository layer interface.</para>
     ///     <para>Keeps dictionary of unique repositories <see cref="IRepository"/>.</para>
     /// </summary>
     public interface IRepositoryLayer : IRepoElement

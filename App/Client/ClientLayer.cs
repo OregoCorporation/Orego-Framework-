@@ -4,7 +4,7 @@ using Elementary;
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>A base class of client layer.</para>
+    ///     <para>A client layer class.</para>
     /// </summary>
     [Using]
     public class ClientLayer : ElementLayer<IClient>, IClientLayer

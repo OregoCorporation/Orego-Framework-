@@ -3,7 +3,8 @@ using System.Collections.Generic;
 namespace OregoFramework.App
 {
     /// <summary>
-    /// <para>Base interface layer of domain controllers to work with business logic.</para>
+    ///     <para>An interactor layer interface.</para>
+    ///     <para>Keeps dictionary of unique interactors <see cref="IInteractor"/>.</para>
     /// </summary>
     public interface IInteractorLayer : IDomainElement
     {

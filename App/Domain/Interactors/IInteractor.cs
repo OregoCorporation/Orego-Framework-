@@ -1,7 +1,7 @@
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>Base domain controller. Works with the business logic.</para>
+    ///     <para>A domain controller interface.</para>
     /// </summary>
     public interface IInteractor : IDomainElement
     {

@@ -10,8 +10,8 @@ namespace OregoFramework.App
     {
         /// <summary>
         ///     <para>Invoke this event when user data is loaded.</para>
-        ///     <param name="T">User data.</param>
         /// </summary>
+        /// <param name="data">Loaded data.</param>
         event Action<T> OnDataLoadedEvent;
     }
 }

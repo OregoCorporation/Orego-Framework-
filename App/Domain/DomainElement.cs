@@ -6,14 +6,26 @@ namespace OregoFramework.App
     /// <inheritdoc cref="IDomainElement"/>
     public abstract class DomainElement : Element, IDomainElement
     {
+        /// <summary>
+        ///     <para>An application frame reference.</para>
+        /// </summary>
         protected IApplicationFrame applicationFrame { get; private set; }
-
-        protected IInteractorLayer interactorLayer { get; private set; }
-
+        
+        /// <summary>
+        ///     <para>A client layer reference.</para>
+        /// </summary>
         protected IClientLayer clientLayer { get; private set; }
 
+        /// <summary>
+        ///     <para>A repository layer reference.</para>
+        /// </summary>
         protected IRepositoryLayer repositoryLayer { get; private set; }
-
+        
+        /// <summary>
+        ///     <para>A interactor layer reference.</para>
+        /// </summary>
+        protected IInteractorLayer interactorLayer { get; private set; }
+        
         protected sealed override void OnPrepare(Element _)
         {
             this.applicationFrame = this.GetRootElement<IApplicationFrame>();
@@ -27,16 +39,16 @@ namespace OregoFramework.App
         {
         }
 
-        /// <inheritdoc cref="IInteractor.GetInteractor{T}"/>
-        protected T GetInteractor<T>() where T : IInteractor
+        /// <inheritdoc cref="IClientLayer.GetClient{T}"/>
+        protected T GetClient<T>() where T : IClient
         {
-            return this.interactorLayer.GetInteractor<T>();
+            return this.clientLayer.GetClient<T>();
         }
 
-        /// <inheritdoc cref="IInteractor.GetInteractors{T}"/>
-        protected IEnumerable<T> GetInteractors<T>() where T : IInteractor
+        /// <inheritdoc cref="IClientLayer.GetClients{T}"/>
+        protected IEnumerable<T> GetClients<T>() where T : IClient
         {
-            return this.interactorLayer.GetInteractors<T>();
+            return this.clientLayer.GetClients<T>();
         }
 
         /// <inheritdoc cref="IRepositoryLayer.GetRepository{T}"/>
@@ -51,16 +63,16 @@ namespace OregoFramework.App
             return this.repositoryLayer.GetRepositories<T>();
         }
 
-        /// <inheritdoc cref="IClientLayer.GetClient{T}"/>
-        protected T GetClient<T>() where T : IClient
+        /// <inheritdoc cref="IInteractor.GetInteractor{T}"/>
+        protected T GetInteractor<T>() where T : IInteractor
         {
-            return this.clientLayer.GetClient<T>();
+            return this.interactorLayer.GetInteractor<T>();
         }
 
-        /// <inheritdoc cref="IClientLayer.GetClients{T}"/>
-        protected IEnumerable<T> GetClients<T>() where T : IClient
+        /// <inheritdoc cref="IInteractor.GetInteractors{T}"/>
+        protected IEnumerable<T> GetInteractors<T>() where T : IInteractor
         {
-            return this.clientLayer.GetClients<T>();
+            return this.interactorLayer.GetInteractors<T>();
         }
     }
 }

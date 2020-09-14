@@ -5,7 +5,7 @@ namespace OregoFramework.App
 {
     /// <summary>
     ///     <para>A database layer class.</para>
-    /// </summary> 
+    /// </summary>
     [Using]
     public class DatabaseLayer : ElementLayer<IDatabase>, IDatabaseLayer
     {

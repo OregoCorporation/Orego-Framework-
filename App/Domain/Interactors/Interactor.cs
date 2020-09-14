@@ -1,7 +1,7 @@
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>Base abstract implementation of domain controller.</para>
+    ///     <para>An interactor class.</para>
     /// </summary>
     public abstract class Interactor : DomainElement, IInteractor
     {
