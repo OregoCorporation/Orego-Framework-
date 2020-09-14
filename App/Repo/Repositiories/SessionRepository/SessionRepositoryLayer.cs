@@ -1,6 +1,5 @@
+using System;
 using System.Collections;
-using Elementary;
-using OregoFramework.Util;
 
 namespace OregoFramework.App
 {
@@ -9,36 +8,23 @@ namespace OregoFramework.App
     {
         #region Event
         
-        /// <inheritdoc cref="ISessionRepositoryLayer.OnBeginSessionEvent"/>
-        public AsyncEvent OnBeginSessionEvent { get; }
-
-        /// <inheritdoc cref="ISessionRepositoryLayer.OnEndSessionEvent"/>
-        public AsyncEvent OnEndSessionEvent { get; }
-
+        /// <summary>
+        ///     <inheritdoc cref="ISessionRepositoryLayer.OnSessionBeganEvent"/>
+        /// </summary>
+        public event Action OnSessionBeganEvent;
+        
+        /// <summary>
+        ///     <inheritdoc cref="ISessionRepositoryLayer.OnSessionEndedEvent"/>
+        /// </summary>
+        public event Action OnSessionEndedEvent;
+        
         #endregion
 
         /// <summary>
         ///     <para>A session started or not.</para>
         /// </summary>
         public bool isActiveSession { get; protected set; }
-
-        protected SessionRepositoryLayer()
-        {
-            this.OnBeginSessionEvent = new AsyncEvent();
-            this.OnEndSessionEvent = new AsyncEvent();
-        }
-
-        protected sealed override void OnDispose(ElementLayer<IRepository> _)
-        {
-            this.OnBeginSessionEvent.Dispose();
-            this.OnEndSessionEvent.Dispose();
-            this.OnDispose(this);
-        }
-
-        protected virtual void OnDispose(SessionRepositoryLayer _)
-        {
-        }
-
+        
         /// <inheritdoc cref="ISessionRepositoryLayer.BeginSession"/>
         public IEnumerator BeginSession()
         {
@@ -46,19 +32,25 @@ namespace OregoFramework.App
             var repositories = this.GetRepositories<ISessionRepository>();
             foreach (var repository in repositories)
             {
-                yield return repository.OnBeginSession();
+                yield return repository.BeginSession();
             }
 
             this.isActiveSession = true;
             yield return this.OnAfterBeginSession();
-            yield return this.OnBeginSessionEvent?.Invoke();
+            this.OnSessionBeganEvent?.Invoke();
         }
 
+        /// <summary>
+        ///     <para>Called before repositories are initialized.</para>
+        /// </summary>
         protected virtual IEnumerator OnBeforeBeginSession()
         {
             yield break;
         }
 
+        /// <summary>
+        ///     <para>Called after repositories are initialized.</para>
+        /// </summary>
         protected virtual IEnumerator OnAfterBeginSession()
         {
             yield break;
@@ -69,21 +61,27 @@ namespace OregoFramework.App
         {
             yield return this.OnBeforeEndSession();
             this.isActiveSession = false;
-            yield return this.OnEndSessionEvent?.Invoke();
             var repositories = this.GetRepositories<ISessionRepository>();
             foreach (var repository in repositories)
             {
-                yield return repository.OnEndSession();
+                yield return repository.EndSession();
             }
 
             yield return this.OnAfterEndSession();
+            this.OnSessionEndedEvent?.Invoke();
         }
 
+        /// <summary>
+        ///     <para>Called before repositories are finished.</para>
+        /// </summary>
         protected virtual IEnumerator OnBeforeEndSession()
         {
             yield break;
         }
 
+        /// <summary>
+        ///     <para>Called after repositories are finished.</para>
+        /// </summary>
         protected virtual IEnumerator OnAfterEndSession()
         {
             yield break;

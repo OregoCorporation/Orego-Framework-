@@ -31,6 +31,7 @@ namespace OregoFramework.App
             this.repositoryLayer = this.applicationFrame.repositoryLayer;
             this.databaseLayer = this.applicationFrame.databaseLayer;
             this.clientLayer = this.applicationFrame.clientLayer;
+            this.OnPrepare(this);
         }
 
         protected virtual void OnPrepare(RepoElement _)

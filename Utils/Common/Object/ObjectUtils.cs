@@ -14,5 +14,10 @@ namespace OregoFramework.Util
         {
             return (T) it;
         }
+
+        public static T To<T>(this object it, Func<T> func)
+        {
+            return func.Invoke();
+        }
     }
 }

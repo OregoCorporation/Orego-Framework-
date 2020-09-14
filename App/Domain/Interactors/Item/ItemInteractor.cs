@@ -5,7 +5,7 @@ namespace OregoFramework.App
 {
     public abstract class ItemInteractor<T, TRepository, TData> : Interactor,
         IItemInteractor<T>
-        where TRepository : IReadyRepository<TData>
+        where TRepository : ILoadRepository<TData>
     {
         #region Event
 
@@ -34,7 +34,7 @@ namespace OregoFramework.App
 
         protected sealed override void OnReady(Element _)
         {
-            this.repository.OnDataReadyEvent += this.OnRepositoryDataReady;
+            this.repository.OnDataLoadedEvent += this.OnRepositoryDataLoaded;
             this.OnPrepare(this);
         }
 
@@ -44,7 +44,7 @@ namespace OregoFramework.App
 
         protected sealed override void OnFinish(Element _)
         {
-            this.repository.OnDataReadyEvent -= this.OnRepositoryDataReady;
+            this.repository.OnDataLoadedEvent -= this.OnRepositoryDataLoaded;
             this.OnFinish(this);
         }
 
@@ -64,7 +64,7 @@ namespace OregoFramework.App
 
         #region RepositoryCallback
 
-        protected void OnRepositoryDataReady(TData data)
+        protected void OnRepositoryDataLoaded(TData data)
         {
             this.Initialize(data);
             this.NotifyAboutInitialized(this);

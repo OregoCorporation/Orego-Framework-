@@ -8,13 +8,13 @@ namespace OregoFramework.App
     public interface ISessionRepository : IRepository
     {
         /// <summary>
-        ///     <para>Called when a user session is starting.</para>
+        ///     <para>Loads user data when starts a user session.</para>
         /// </summary>
-        IEnumerator OnBeginSession();
+        IEnumerator BeginSession();
         
         /// <summary>
-        ///     <para>Called when a user session is finishing.</para>
+        ///     <para>Unloads user data when finishes a user session.</para>
         /// </summary>
-        IEnumerator OnEndSession();
+        IEnumerator EndSession();
     }
 }

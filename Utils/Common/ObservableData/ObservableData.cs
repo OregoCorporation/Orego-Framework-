@@ -4,7 +4,7 @@ using UnityEngine;
 namespace OregoFramework.Util
 {
     [Serializable]
-    public sealed class ObservableData<T>
+    public class ObservableData<T>
     {
         public delegate void ValueChangedHandler(object sender, ObservableData<T> self, T value);
 

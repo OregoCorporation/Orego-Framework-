@@ -6,7 +6,7 @@ namespace OregoFramework.App
     public abstract class ItemMapInteractor<K, T, TRepository, TData> :
         ItemInteractor<T, TRepository, IEnumerable<TData>>,
         IItemMapInteractor<K, T>
-        where TRepository : IReadyRepository<IEnumerable<TData>>
+        where TRepository : ILoadRepository<IEnumerable<TData>>
     {
         protected readonly Dictionary<K, T> objectMap;
 

@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using OregoFramework.Util;
 
 namespace OregoFramework.App
 {
@@ -10,10 +10,16 @@ namespace OregoFramework.App
     {
         #region Event
 
-        AsyncEvent OnBeginSessionEvent { get; }
+        /// <summary>
+        ///     <para>Invoke this event when session is started.</para>
+        /// </summary>
+        event Action OnSessionBeganEvent;
 
-        AsyncEvent OnEndSessionEvent { get; }
-
+        /// <summary>
+        ///     <para>Invoke this event when session is ended.</para>
+        /// </summary>
+        event Action OnSessionEndedEvent;
+        
         #endregion
 
         /// <summary>
@@ -22,14 +28,14 @@ namespace OregoFramework.App
         bool isActiveSession { get; }
 
         /// <summary>
-        ///     <para>Starts a user session.</para>
-        ///     <para>Loads a user data into repositories.</para>
+        ///     <para>Starts a user session asynchronously.</para>
+        ///     <para>Loads user data into repositories.</para>
         /// </summary>
         IEnumerator BeginSession();
 
         /// <summary>
-        ///     <para>Finihses a user session.</para>
-        ///     <para>Unloads a user data from repositories.</para>
+        ///     <para>Finihses a user session asynchronously.</para>
+        ///     <para>Unloads user data from repositories.</para>
         /// </summary>
         IEnumerator EndSession();
     }

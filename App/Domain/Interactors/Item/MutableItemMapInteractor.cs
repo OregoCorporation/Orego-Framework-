@@ -6,7 +6,7 @@ namespace OregoFramework.App
     public abstract class MutableItemMapInteractor<K, T, TRepository, TData> :
         ItemMapInteractor<K, T, TRepository, TData>,
         IMutableItemMapInteractor<K, T>
-        where TRepository : IReadyRepository<IEnumerable<TData>>
+        where TRepository : ILoadRepository<IEnumerable<TData>>
 
     {
         #region Event
