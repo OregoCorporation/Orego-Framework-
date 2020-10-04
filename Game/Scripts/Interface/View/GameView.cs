@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace OregoFramework.Game
@@ -6,9 +7,25 @@ namespace OregoFramework.Game
     {
         protected IGameInterface gameInterface { get; private set; }
 
-        protected T GetGameContext<T>() where T : IGameContext
+        private IGameContext _gameContext;
+
+        protected IGameContext gameContext
         {
-            return this.gameInterface.GetGameContext<T>();
+            get
+            {
+                if (this._gameContext != null)
+                {
+                    return this._gameContext;
+                }
+
+                if (this.gameInterface is null)
+                {
+                    throw new Exception("Game interface is not provided!");
+                }
+                
+                this._gameContext = this.gameInterface.currentGameContext;
+                return this._gameContext;
+            }
         }
 
         #region Lifecycle

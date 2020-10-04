@@ -4,28 +4,28 @@ namespace OregoFramework.Game
 {
     public abstract class GameInterface : MonoBehaviour, IGameInterface
     {
-        private IGameContext gameContext;
+        public IGameContext currentGameContext { get; private set; }
 
         public virtual void BindGameContext(IGameContext gameContext)
         {
-            this.gameContext = gameContext;
-            this.gameContext.OnGamePreparedEvent += this.OnGamePrepared;
-            this.gameContext.OnGameReadyEvent += this.OnGameReady;
-            this.gameContext.OnGameStartedEvent += this.OnGameStarted;
-            this.gameContext.OnGamePausedEvent += this.OnGamePaused;
-            this.gameContext.OnGameResumedEvent += this.OnGameResumed;
-            this.gameContext.OnGameFinishedEvent += this.OnGameFinished;
+            this.currentGameContext = gameContext;
+            this.currentGameContext.OnGamePreparedEvent += this.OnGamePrepared;
+            this.currentGameContext.OnGameReadyEvent += this.OnGameReady;
+            this.currentGameContext.OnGameStartedEvent += this.OnGameStarted;
+            this.currentGameContext.OnGamePausedEvent += this.OnGamePaused;
+            this.currentGameContext.OnGameResumedEvent += this.OnGameResumed;
+            this.currentGameContext.OnGameFinishedEvent += this.OnGameFinished;
         }
 
         public virtual void UnbindGameContext()
         {
-            this.gameContext.OnGamePreparedEvent -= this.OnGamePrepared;
-            this.gameContext.OnGameReadyEvent -= this.OnGameReady;
-            this.gameContext.OnGameStartedEvent -= this.OnGameStarted;
-            this.gameContext.OnGamePausedEvent -= this.OnGamePaused;
-            this.gameContext.OnGameResumedEvent -= this.OnGameResumed;
-            this.gameContext.OnGameFinishedEvent -= this.OnGameFinished;
-            this.gameContext = null;
+            this.currentGameContext.OnGamePreparedEvent -= this.OnGamePrepared;
+            this.currentGameContext.OnGameReadyEvent -= this.OnGameReady;
+            this.currentGameContext.OnGameStartedEvent -= this.OnGameStarted;
+            this.currentGameContext.OnGamePausedEvent -= this.OnGamePaused;
+            this.currentGameContext.OnGameResumedEvent -= this.OnGameResumed;
+            this.currentGameContext.OnGameFinishedEvent -= this.OnGameFinished;
+            this.currentGameContext = null;
         }
 
         protected virtual void OnGamePrepared(object sender)
@@ -50,11 +50,6 @@ namespace OregoFramework.Game
 
         protected virtual void OnGameFinished(object sender)
         {
-        }
-
-        public T GetGameContext<T>() where T : IGameContext
-        {
-            return (T) this.gameContext;
         }
     }
 }
