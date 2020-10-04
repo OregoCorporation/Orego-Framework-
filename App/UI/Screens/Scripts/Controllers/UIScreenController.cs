@@ -14,13 +14,6 @@ namespace OregoFramework.App
 
         #endregion
 
-        protected readonly Dictionary<Type, IResource> screenTypeVsResourceMap;
-
-        protected UIScreenController()
-        {
-            this.screenTypeVsResourceMap = new Dictionary<Type, IResource>();
-        }
-
         public UIScreen currentScreen { get; private set; }
 
         public virtual Transform rootTransform
@@ -28,29 +21,39 @@ namespace OregoFramework.App
             get { return this.transform; }
         }
 
+        protected readonly Dictionary<Type, string> screenPathMap;
+
+        protected UIScreenController()
+        {
+            this.screenPathMap = new Dictionary<Type, string>();
+        }
+
+        [SerializeField]
+        protected UIScreenConfig config;
+
         #region Initialize
 
         public void Initialize()
         {
-            this.LoadScreenResources();
+            this.LoadScreenPaths();
             var defaultScreenType = this.GetDefaultScreenType();
             this.OnInitialize();
             this.StartScreen(this, defaultScreenType);
         }
 
-        private void LoadScreenResources()
+        private void LoadScreenPaths()
         {
-            var resources = this.ProvideResources();
-            foreach (var resource in resources)
+            var infoArray = this.config.array;
+            foreach (var screenInfo in infoArray)
             {
-                var screenType = resource.screenType;
-                this.screenTypeVsResourceMap[screenType] = resource;
-            }
-        }
+                var screenType = Type.GetType(screenInfo.className);
+                if (screenType is null)
+                {
+                    throw new Exception($"Screen type {screenInfo.className} is not found!");
+                }
 
-        protected virtual IEnumerable<IUIScreenResource> ProvideResources()
-        {
-            return ResourceLayer.GetResources<IUIScreenResource>();
+                this.screenPathMap[screenType] = screenInfo.path;
+            }
         }
 
         protected abstract Type GetDefaultScreenType();
@@ -84,8 +87,8 @@ namespace OregoFramework.App
 
         protected virtual UIScreen LoadScreen(Type screenType)
         {
-            var resource = this.screenTypeVsResourceMap.Find(screenType);
-            var prefab = Resources.Load<UIScreen>(resource.path);
+            var path = this.screenPathMap.Find(screenType);
+            var prefab = Resources.Load<UIScreen>(path);
             var nextScreen = Instantiate(prefab, this.rootTransform);
             return nextScreen;
         }

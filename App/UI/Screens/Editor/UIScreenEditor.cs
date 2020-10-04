@@ -1,18 +1,19 @@
-#if UNITY_EDITOR
+using OregoFramework.App;
 using UnityEditor;
 
+#if UNITY_EDITOR
 namespace OregoFramework.Edit
 {
-    public static class LoggerConfigEditor
+    internal sealed class UIScreenEditor
     {
         /// <summary>
-        ///     <para>Selects the logger config. <see cref="LoggerConfig"/></para>
+        ///     <para>Selects the screen config. <see cref="UIScreenConfig"/></para>
         /// </summary>
         [MenuItem("Window/Orego/Config/Show Logger Config...")]
-        private static void SelectAssemblyConfigAsset()
+        private static void SelectScreenConfigAsset()
         {
             const string path =
-                "Assets/Orego/Modules/Units/Logger/Resources/LoggerConfig.asset";
+                "Assets/Orego/App/UI/Screens/Resources/UIScreenConfig.asset";
             Selection.activeObject = AssetDatabase.LoadMainAssetAtPath(path);
         }
     }
