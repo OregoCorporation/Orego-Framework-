@@ -2,7 +2,7 @@ namespace OregoFramework.Game
 {
     public interface IGameView
     {
-        void OnAttachGame(IGameInterface gameInterface);
+        void OnRegistered(IGameInterface gameInterface);
         
         void OnGamePrepared(object sender);
 
@@ -16,6 +16,6 @@ namespace OregoFramework.Game
 
         void OnGameFinished(object sender);
 
-        void OnDetachGame();
+        void OnUnregistered();
     }
 }

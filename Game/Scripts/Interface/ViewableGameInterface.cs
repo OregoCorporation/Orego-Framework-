@@ -21,12 +21,12 @@ namespace OregoFramework.Game
         public virtual void AddView(IGameView node)
         {
             this.viewMap.AddByType(node);
-            node.OnAttachGame(this);
+            node.OnRegistered(this);
         }
 
         public virtual void RemoveView(IGameView node)
         {
-            node.OnDetachGame();
+            node.OnUnregistered();
             this.viewMap.RemoveByType(node);
         }
 

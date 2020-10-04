@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace OregoFramework.App
 {
-    public abstract class UIScreenController : UIElement
+    public abstract class UIScreenController : UIElement, UISystem.IController
     {
         #region Event
 
@@ -99,5 +99,23 @@ namespace OregoFramework.App
         }
 
         #endregion
+
+        void UISystem.IController.OnRegistered()
+        {
+            this.OnRegistered();
+        }
+
+        protected virtual void OnRegistered()
+        {
+        }
+
+        void UISystem.IController.OnUnregistered()
+        {
+            this.OnUnregistered();
+        }
+
+        protected virtual void OnUnregistered()
+        {
+        }
     }
 }

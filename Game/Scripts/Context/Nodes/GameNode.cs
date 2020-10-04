@@ -6,13 +6,13 @@ namespace OregoFramework.Game
     {
         protected IGameContext gameContext { get; private set; }
 
-        public void OnAttachGame(IGameContext gameContext)
+        public void OnRegistered(IGameContext gameContext)
         {
             this.gameContext = gameContext;
-            this.OnAttachGame(this, gameContext);
+            this.OnRegistered(this, gameContext);
         }
 
-        protected virtual void OnAttachGame(GameNode _, IGameContext gameContext)
+        protected virtual void OnRegistered(GameNode _, IGameContext gameContext)
         {
         }
 
@@ -79,12 +79,12 @@ namespace OregoFramework.Game
         {
         }
 
-        public void OnDetachGame()
+        public void OnUnregistered()
         {
-            this.OnDetachGame(this);
+            this.OnUnregistered(this);
         }
 
-        protected virtual void OnDetachGame(GameNode _)
+        protected virtual void OnUnregistered(GameNode _)
         {
         }
     }

@@ -152,12 +152,12 @@ namespace OregoFramework.Game
         public void RegisterNode(IGameNode gameNode)
         {
             this.nodeMap.AddByType(gameNode);
-            gameNode.OnAttachGame(this);
+            gameNode.OnRegistered(this);
         }
 
         public virtual void UnregisterNode(IGameNode gameNode)
         {
-            gameNode.OnDetachGame();
+            gameNode.OnUnregistered();
             this.nodeMap.RemoveByType(gameNode);
         }
 

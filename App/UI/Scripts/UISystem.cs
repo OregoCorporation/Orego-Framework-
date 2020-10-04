@@ -17,13 +17,13 @@ namespace OregoFramework.App
         public static UISystem instance { get; private set; }
 
         /// <summary>
-        ///     <para>Registered UI elements.</para>
+        ///     <para>Registered UI controller references.</para>
         /// </summary>
-        private readonly Dictionary<Type, UIElement> registeredUIElementMap;
+        private readonly Dictionary<Type, IController> controllerMap;
 
         protected UISystem()
         {
-            this.registeredUIElementMap = new Dictionary<Type, UIElement>();
+            this.controllerMap = new Dictionary<Type, IController>();
         }
 
         private void Awake()
@@ -36,26 +36,59 @@ namespace OregoFramework.App
         {
         }
         
+        /// <summary>
+        ///     <para>Returns an element context reference.</para>
+        /// </summary>
         public abstract IElementContext ProvideElementaryContext();
 
-        public void RegisterUIElement(UIElement uiElement)
+        /// <summary>
+        ///     <para>Adds an controller reference into dictionary with registered controllers.</para>
+        /// </summary>
+        public void RegisterController(IController controller)
         {
-            this.registeredUIElementMap.Add(uiElement.GetType(), uiElement);
+            this.controllerMap.Add(controller.GetType(), controller);
+            controller.OnRegistered();
         }
 
-        public void UnregisterUIElement(UIElement uiElement)
+        /// <summary>
+        ///     <para>Removes an controller reference from dictionary with registered controllers.</para>
+        /// </summary>
+        public void UnregisterController(IController controller)
         {
-            this.registeredUIElementMap.Remove(uiElement.GetType());
+            this.controllerMap.Remove(controller.GetType());
+            controller.OnUnregistered();
         }
 
-        public T GetUIElement<T>() where T : UIElement
+        /// <summary>
+        ///     <para>Returns a registered controller.</para>
+        /// </summary>
+        public T GetController<T>() where T : IController
         {
-            return this.registeredUIElementMap.Find<T, UIElement>();
+            return this.controllerMap.Find<T, IController>();
         }
 
-        public IEnumerable<T> GetUIElements<T>() where T : UIElement
+        /// <summary>
+        ///     <para>Returns registered controllers.</para>
+        /// </summary>
+        public IEnumerable<T> GetControllers<T>() where T : IController
         {
-            return this.registeredUIElementMap.FindAll<T, UIElement>();
+            return this.controllerMap.FindAll<T, IController>();
+        }
+        
+        /// <summary>
+        ///     <para>An UI controller.</para>
+        /// </summary>
+        public interface IController
+        {
+            /// <summary>
+            ///     <para>Calls when registers to the UI system.</para>
+            /// </summary>
+            void OnRegistered();
+
+            /// <summary>
+            ///     <para>Calls when unregisters from the UI system.</para>
+            /// </summary>
+            void OnUnregistered();
         }
     }
 }

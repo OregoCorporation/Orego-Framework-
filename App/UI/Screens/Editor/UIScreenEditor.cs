@@ -9,7 +9,7 @@ namespace OregoFramework.Edit
         /// <summary>
         ///     <para>Selects the screen config. <see cref="UIScreenConfig"/></para>
         /// </summary>
-        [MenuItem("Window/Orego/Config/Show Logger Config...")]
+        [MenuItem("Window/Orego/Config/Show UI Screen Config...")]
         private static void SelectScreenConfigAsset()
         {
             const string path =

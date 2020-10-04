@@ -13,7 +13,7 @@ namespace OregoFramework.Game
 
         #region Lifecycle
 
-        public virtual void OnAttachGame(IGameInterface gameInterface)
+        public virtual void OnRegistered(IGameInterface gameInterface)
         {
             this.gameInterface = gameInterface;
         }
@@ -42,7 +42,7 @@ namespace OregoFramework.Game
         {
         }
 
-        public virtual void OnDetachGame()
+        public virtual void OnUnregistered()
         {
         }
 

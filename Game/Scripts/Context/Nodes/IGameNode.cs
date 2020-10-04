@@ -2,7 +2,7 @@ namespace OregoFramework.Game
 {
     public interface IGameNode
     {
-        void OnAttachGame(IGameContext gameContext);
+        void OnRegistered(IGameContext gameContext);
         
         void OnPrepareGame(object sender);
 
@@ -18,6 +18,6 @@ namespace OregoFramework.Game
 
         void OnDestroyGame(object sender);
 
-        void OnDetachGame();
+        void OnUnregistered();
     }
 }
