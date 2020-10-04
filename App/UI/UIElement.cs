@@ -1,43 +1,110 @@
 using System.Collections.Generic;
+using Elementary;
+using UnityEngine;
 
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     UI elment of system.
+    ///     <para>UIElement is the base class from which every UI script derives.</para>
     /// </summary>
-    public abstract class UIElement : UIBehaviour
+    public abstract class UIElement : MonoBehaviour
     {
-        private bool isUiSystemBound;
+        private bool uiSystemProvided;
 
-        private IUISystem _uiSystem;
+        private UISystem _uiSystem;
 
-        private IUISystem uiSystem
+        protected UISystem uiSystem
         {
             get
             {
-                if (!this.isUiSystemBound)
+                if (this.uiSystemProvided)
                 {
-                    this._uiSystem = UISystem.instance;
-                    this.isUiSystemBound = true;
+                    return this._uiSystem;
                 }
 
+                this._uiSystem = UISystem.instance;
+                this.uiSystemProvided = true;
                 return this._uiSystem;
             }
         }
-
-        protected T GetUISystem<T>() where T : IUISystem
+        
+        
+        /// <summary>
+        ///     <para>An element context reference.</para>
+        /// </summary>
+        private IElementContext _elementContext;
+        
+        protected IElementContext elementContext
         {
-            return (T) this.uiSystem;
+            get
+            {
+                if (this._elementContext == null)
+                {
+                    this._elementContext = this.uiSystem.ProvideElementaryContext();
+                }
+
+                return this._elementContext;
+            }
         }
 
-        protected T GetUIController<T>() where T : IUISystemController
+        /// <summary>
+        ///     <para>An application frame reference.</para>
+        /// </summary>
+        private IApplicationFrame _applicationFrame;
+
+        protected IApplicationFrame applicationFrame
         {
-            return this.uiSystem.GetUIController<T>();
+            get
+            {
+                if (this._applicationFrame == null)
+                {
+                    this._applicationFrame = this.elementContext.GetRootElement<IApplicationFrame>();
+                }
+
+                return this._applicationFrame;
+            }
         }
 
-        protected IEnumerable<T> GetUIControllers<T>() where T : IUISystemController
+        /// <summary>
+        ///     <para>An interactor layer reference.</para>
+        /// </summary>
+        private IInteractorLayer _interactorLayer;
+
+        protected IInteractorLayer interactorLayer
         {
-            return this.uiSystem.GetUIControllers<T>();
+            get
+            {
+                if (this._interactorLayer == null)
+                {
+                    this._interactorLayer = this.applicationFrame.interactorLayer;
+                }
+
+                return this._interactorLayer;
+            }
+        }
+
+        /// <inheritdoc cref="IInteractorLayer.GetInteractor{T}"/>
+        protected T GetInteractor<T>() where T : IInteractor
+        {
+            return this.interactorLayer.GetInteractor<T>();
+        }
+
+        /// <inheritdoc cref="IInteractorLayer.GetInteractors{T}"/>
+        protected IEnumerable<T> GetInteractors<T>() where T : IInteractor
+        {
+            return this.interactorLayer.GetInteractors<T>();
+        }
+        
+        /// <inheritdoc cref="UISystem.GetUIElement{T}"/>
+        protected T GetUIElement<T>() where T : UIElement
+        {
+            return this.uiSystem.GetUIElement<T>();
+        }
+
+        /// <inheritdoc cref="UISystem.GetUIElements{T}"/>
+        protected IEnumerable<T> GetUIElements<T>() where T : UIElement
+        {
+            return this.uiSystem.GetUIElements<T>();
         }
     }
 }

@@ -4,7 +4,7 @@ using OregoFramework.Util;
 
 namespace OregoFramework.App
 {
-    public abstract class UIBackPressController : UIElement, IUISystemController
+    public abstract class UIBackPressController : UIElement
     {
         protected readonly Stack<Action> onBackPressActionStack;
 

@@ -2,50 +2,60 @@ using System;
 using System.Collections.Generic;
 using Elementary;
 using OregoFramework.Util;
+using UnityEngine;
 
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>User interface system.</para>
-    ///     <para>A root class in UI layer.</para>
-    ///     <para>Keeps UI controllers.</para>
+    ///     <para>A root singleton class in UI layer.</para>
     /// </summary>
-    public abstract class UISystem : UIBehaviour, IUISystem
+    public abstract class UISystem : MonoBehaviour
     {
+        /// <summary>
+        ///     <para>Singleton reference.</para>
+        /// </summary>
         public static UISystem instance { get; private set; }
 
-        private readonly Dictionary<Type, IUISystemController> controllerMap;
+        /// <summary>
+        ///     <para>Registered UI elements.</para>
+        /// </summary>
+        private readonly Dictionary<Type, UIElement> registeredUIElementMap;
 
         protected UISystem()
         {
-            this.controllerMap = new Dictionary<Type, IUISystemController>();
+            this.registeredUIElementMap = new Dictionary<Type, UIElement>();
         }
 
-        protected virtual void Awake()
+        private void Awake()
         {
             instance = this;
+            this.OnAwake();
         }
 
-        public void AddUIController(IUISystemController uiController)
+        protected virtual void OnAwake()
         {
-            this.controllerMap.Add(uiController.GetType(), uiController);
         }
+        
+        public abstract IElementContext ProvideElementaryContext();
 
-        public void RemoveUIController(IUISystemController uiController)
+        public void RegisterUIElement(UIElement uiElement)
         {
-            this.controllerMap.Remove(uiController.GetType());
+            this.registeredUIElementMap.Add(uiElement.GetType(), uiElement);
         }
 
-        public T GetUIController<T>() where T : IUISystemController
+        public void UnregisterUIElement(UIElement uiElement)
         {
-            return this.controllerMap.Find<T, IUISystemController>();
+            this.registeredUIElementMap.Remove(uiElement.GetType());
         }
 
-        public IEnumerable<T> GetUIControllers<T>() where T : IUISystemController
+        public T GetUIElement<T>() where T : UIElement
         {
-            return this.controllerMap.FindAll<T, IUISystemController>();
+            return this.registeredUIElementMap.Find<T, UIElement>();
         }
 
-        public abstract IElementContext ProvideContext();
+        public IEnumerable<T> GetUIElements<T>() where T : UIElement
+        {
+            return this.registeredUIElementMap.FindAll<T, UIElement>();
+        }
     }
 }

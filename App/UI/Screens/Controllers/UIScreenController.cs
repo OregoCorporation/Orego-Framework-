@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace OregoFramework.App
 {
-    public abstract class UIScreenController : UIElement, IUISystemController
+    public abstract class UIScreenController : UIElement
     {
         #region Event
 

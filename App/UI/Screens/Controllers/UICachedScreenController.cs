@@ -13,7 +13,7 @@ namespace OregoFramework.App
             this.previousScreensStack = new Stack<Type>();
         }
 
-        public override void StartScreen(
+        public sealed override void StartScreen(
             object sender,
             Type screenType,
             IUIScreenTransition transition = null
@@ -29,7 +29,7 @@ namespace OregoFramework.App
             base.StartScreen(sender, screenType, transition);
         }
 
-        public virtual void StartPreviousScreen(object sender, IUIScreenTransition transition)
+        public void StartPreviousScreen(object sender, IUIScreenTransition transition = null)
         {
             var nextScreenType = !this.previousScreensStack.IsEmpty()
                 ? this.previousScreensStack.Pop()
@@ -37,7 +37,7 @@ namespace OregoFramework.App
             base.StartScreen(sender, nextScreenType, transition);
         }
 
-        public void ClearPreviousScreenStack()
+        public void ClearStack()
         {
             this.previousScreensStack.Clear();
         }
