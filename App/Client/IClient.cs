@@ -6,7 +6,7 @@ namespace OregoFramework.App
     /// <summary>
     ///     <para>A client interface.</para>
     ///     <para>Each client is responsible for one network connection type.</para>
-    ///     <para>Keeps dictionary of unique request controllers <see cref="IRequestController"/>.</para>
+    ///     <para>Keeps a dictionary of unique request controllers <see cref="IRequestController"/>.</para>
     /// </summary>
     public interface IClient : IElement
     {

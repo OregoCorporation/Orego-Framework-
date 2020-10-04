@@ -33,8 +33,7 @@ namespace OregoFramework.App
 
         protected sealed override IEnumerator OnAfterBeginSession()
         {
-            yield return base.OnAfterBeginSession();
-            yield return this.linker.ResolveDataInRepositories();
+            yield return this.linker.LinkData();
             yield return this.OnAfterBeginSession(this);
         }
 

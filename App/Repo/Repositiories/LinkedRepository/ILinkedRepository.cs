@@ -13,7 +13,7 @@ namespace OregoFramework.App
         /// </summary>
         /// 
         /// <param name="isResolved">Boolean reference. Put a boolean result into reference.</param>
-        /// <returns>Was update or not.</returns>
+        /// <returns>Was data update or not.</returns>
         IEnumerator ResolveLinkedData(Reference<bool> isResolved);
     }
 }

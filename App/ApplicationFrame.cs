@@ -23,7 +23,7 @@ namespace OregoFramework.App
         #region OnCreate
 
         /// <summary>
-        ///     <para>Creates the layers by their types.</para>
+        ///     <para>Creates the layer instances by their types.</para>
         /// </summary>
         protected sealed override void OnCreate(Element _, IElementContext context)
         {

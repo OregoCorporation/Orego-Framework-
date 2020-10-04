@@ -7,8 +7,7 @@ namespace OregoFramework.App
     ///     Controls a game context.
     /// </summary>
     /// <typeparam name="T">Game context type.</typeparam>
-    public abstract class GameplayInteractor<T> : Interactor 
-        where T : IGameContext
+    public abstract class GameplayInteractor<T> : Interactor where T : IGameContext
     {
         #region Event
 

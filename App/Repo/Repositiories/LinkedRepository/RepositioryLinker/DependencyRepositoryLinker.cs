@@ -72,8 +72,8 @@ namespace OregoFramework.App
             repositoryDependencies.Remove(dependencyRepository);
         }
 
-        /// <inheritdoc cref="IRepositoryLinker.ResolveDataInRepositories"/>
-        public IEnumerator ResolveDataInRepositories()
+        /// <inheritdoc cref="IRepositoryLinker.LinkData"/>
+        public IEnumerator LinkData()
         {
             var repositories = this.repositoryLayer.GetRepositories<ILinkedRepository>();
             var notResolvedRepositories = new RepositorySet(repositories);

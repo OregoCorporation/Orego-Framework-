@@ -8,8 +8,8 @@ namespace OregoFramework.App
     /// </summary>
     public abstract class LoopRepositoryLinker : RepoElement, IRepositoryLinker
     {
-        /// <inheritdoc cref="IRepositoryLinker.ResolveDataInRepositories"/>
-        public IEnumerator ResolveDataInRepositories()
+        /// <inheritdoc cref="IRepositoryLinker.LinkData"/>
+        public IEnumerator LinkData()
         {
             var repositories = this.repositoryLayer.GetRepositories<ILinkedRepository>();
             var isRequiredResolve = true;

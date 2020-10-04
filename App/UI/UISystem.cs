@@ -5,15 +5,20 @@ using OregoFramework.Util;
 
 namespace OregoFramework.App
 {
+    /// <summary>
+    ///     <para>User interface system.</para>
+    ///     <para>A root class in UI layer.</para>
+    ///     <para>Keeps UI controllers.</para>
+    /// </summary>
     public abstract class UISystem : UIBehaviour, IUISystem
     {
         public static UISystem instance { get; private set; }
 
-        private readonly Dictionary<Type, IUISystemController> uiControllerMap;
+        private readonly Dictionary<Type, IUISystemController> controllerMap;
 
         protected UISystem()
         {
-            this.uiControllerMap = new Dictionary<Type, IUISystemController>();
+            this.controllerMap = new Dictionary<Type, IUISystemController>();
         }
 
         protected virtual void Awake()
@@ -23,22 +28,22 @@ namespace OregoFramework.App
 
         public void AddUIController(IUISystemController uiController)
         {
-            this.uiControllerMap.Add(uiController.GetType(), uiController);
+            this.controllerMap.Add(uiController.GetType(), uiController);
         }
 
         public void RemoveUIController(IUISystemController uiController)
         {
-            this.uiControllerMap.Remove(uiController.GetType());
+            this.controllerMap.Remove(uiController.GetType());
         }
 
         public T GetUIController<T>() where T : IUISystemController
         {
-            return DictionaryUtils.Find<T, IUISystemController>(this.uiControllerMap);
+            return this.controllerMap.Find<T, IUISystemController>();
         }
 
         public IEnumerable<T> GetUIControllers<T>() where T : IUISystemController
         {
-            return this.uiControllerMap.FindAll<T, IUISystemController>();
+            return this.controllerMap.FindAll<T, IUISystemController>();
         }
 
         public abstract IElementContext ProvideContext();

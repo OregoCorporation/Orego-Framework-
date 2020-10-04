@@ -8,8 +8,8 @@ namespace OregoFramework.App
     public interface IRepositoryLinker : IRepoElement
     {
         /// <summary>
-        ///     <para>Links repositories asynchronously.</para>
+        ///     <para>Links data in repository layer asynchronously.</para>
         /// </summary>
-        IEnumerator ResolveDataInRepositories();
+        IEnumerator LinkData();
     }
 }
