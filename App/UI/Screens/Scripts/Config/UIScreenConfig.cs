@@ -8,7 +8,7 @@ namespace OregoFramework.App
     ///     <para>Keeps a metadata of screens.</para>
     /// </summary>
     [CreateAssetMenu(
-        fileName = "ScreenConfig",
+        fileName = "UIScreenConfig",
         menuName = "Orego/App/UI/New UI Screen Config"
     )]
     public sealed class UIScreenConfig : ScriptableObject
