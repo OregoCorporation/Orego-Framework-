@@ -15,7 +15,7 @@ namespace OregoFramework.App
         private bool uiSystemProvided;
 
         /// <summary>
-        ///     <para>An UI system reference</para>
+        ///     <para>An UI system reference.</para>
         /// </summary>
         private UISystem _uiSystem;
 

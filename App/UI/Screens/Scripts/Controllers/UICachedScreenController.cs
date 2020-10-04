@@ -6,14 +6,19 @@ namespace OregoFramework.App
 {
     public abstract class UICachedScreenController : UIScreenController
     {
-        private readonly Stack<Type> previousScreensStack;
+        private readonly Stack<Type> previousScreenStack;
 
         protected UICachedScreenController()
         {
-            this.previousScreensStack = new Stack<Type>();
+            this.previousScreenStack = new Stack<Type>();
         }
 
-        public sealed override void StartScreen(
+        /// <summary>
+        ///     <para>Opens a new screen and closes this screen.</para>
+        /// </summary>
+        /// <param name="transition">Put args into transition for new screen.</param>
+        /// <typeparam name="T">Type of a new screen.</typeparam>
+        public sealed override void ChangeScreen(
             object sender,
             Type screenType,
             IUIScreenTransition transition = null
@@ -23,23 +28,23 @@ namespace OregoFramework.App
             if (previousScreen != null)
             {
                 var previousScreenType = previousScreen.GetType();
-                this.previousScreensStack.Push(previousScreenType);
+                this.previousScreenStack.Push(previousScreenType);
             }
 
-            base.StartScreen(sender, screenType, transition);
+            base.ChangeScreen(sender, screenType, transition);
         }
 
-        public void StartPreviousScreen(object sender, IUIScreenTransition transition = null)
+        public void ChangeToPreviousScreen(object sender, IUIScreenTransition transition = null)
         {
-            var nextScreenType = !this.previousScreensStack.IsEmpty()
-                ? this.previousScreensStack.Pop()
-                : this.GetDefaultScreenType();
-            base.StartScreen(sender, nextScreenType, transition);
+            var nextScreenType = !this.previousScreenStack.IsEmpty()
+                ? this.previousScreenStack.Pop()
+                : this.GetFirstScreenType();
+            base.ChangeScreen(sender, nextScreenType, transition);
         }
 
         public void ClearStack()
         {
-            this.previousScreensStack.Clear();
+            this.previousScreenStack.Clear();
         }
     }
 }

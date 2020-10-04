@@ -4,15 +4,24 @@ using UnityEngine.Serialization;
 
 namespace OregoFramework.App
 {
+    /// <summary>
+    ///     <para>Keeps a metadata of screens.</para>
+    /// </summary>
     [CreateAssetMenu(
         fileName = "ScreenConfig",
         menuName = "Orego/App/UI/New UI Screen Config"
     )]
     public sealed class UIScreenConfig : ScriptableObject
     {
+        /// <summary>
+        ///     <para>Array of screen metadata</para>
+        /// </summary>
         [SerializeField]
         public ScreenInfo[] array;
         
+        /// <summary>
+        ///     <para>A screen metadata.</para>
+        /// </summary>
         [Serializable]
         public sealed class ScreenInfo
         {

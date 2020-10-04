@@ -1,44 +1,63 @@
 using System;
 using System.Collections.Generic;
-using OregoFramework.Unit;
 using OregoFramework.Util;
 using UnityEngine;
 
 namespace OregoFramework.App
 {
+    /// <summary>
+    ///     <para>Controls UI screens. <see cref="UIScreen"/>.</para>
+    /// </summary>
     public abstract class UIScreenController : UIElement, UISystem.IController
     {
         #region Event
 
+        /// <summary>
+        ///     <para>Called when screens change.</para>
+        ///     <param name="UIScreen">A new screen.</param>
+        /// </summary>
         public event Action<UIScreen> OnScreenChangedEvent;
 
         #endregion
 
+        /// <summary>
+        ///     <para>Displayed current screen.</para>
+        /// </summary>
         public UIScreen currentScreen { get; private set; }
 
+        /// <summary>
+        ///     <para>Containter for screens.</para>
+        /// </summary>
         public virtual Transform rootTransform
         {
             get { return this.transform; }
         }
 
+        /// <summary>
+        ///     <para>Keeps screen type vs prefab path.</para>
+        /// </summary>
         protected readonly Dictionary<Type, string> screenPathMap;
-
+        
+        /// <inheritdoc cref="UIScreenConfig"/> 
+        [SerializeField]
+        protected UIScreenConfig config;
+        
         protected UIScreenController()
         {
             this.screenPathMap = new Dictionary<Type, string>();
         }
 
-        [SerializeField]
-        protected UIScreenConfig config;
-
         #region Initialize
 
+        /// <summary>
+        ///     <para>Initializes this controller.</para>
+        ///     <para>Opens the first screen.</para>
+        /// </summary>
         public void Initialize()
         {
             this.LoadScreenPaths();
-            var defaultScreenType = this.GetDefaultScreenType();
             this.OnInitialize();
-            this.StartScreen(this, defaultScreenType);
+            this.ChangeScreen(this, this.GetFirstScreenType());
         }
 
         private void LoadScreenPaths()
@@ -56,7 +75,7 @@ namespace OregoFramework.App
             }
         }
 
-        protected abstract Type GetDefaultScreenType();
+        protected abstract Type GetFirstScreenType();
 
         protected virtual void OnInitialize()
         {
@@ -66,7 +85,13 @@ namespace OregoFramework.App
 
         #region Transitions
 
-        public virtual void StartScreen(
+        /// <summary>
+        ///     <para>Changes screens.</para>
+        ///     <para>Closes a previous screen and opens a new screen.</para>
+        /// </summary>
+        /// <param name="transition">Put args into transition for a new screen.</param>
+        /// <typeparam name="T">Type of a new screen.</typeparam>
+        public virtual void ChangeScreen(
             object sender,
             Type screenType,
             IUIScreenTransition transition = null
@@ -76,11 +101,12 @@ namespace OregoFramework.App
             if (previousScreen != null)
             {
                 this.currentScreen = null;
+                previousScreen.OnUnload(sender);
                 this.UnloadScreen(previousScreen);
             }
 
             var nextScreen = this.LoadScreen(screenType);
-            nextScreen.OnInitialize(sender, transition);
+            nextScreen.OnLoaded(sender, transition);
             this.currentScreen = nextScreen;
             this.OnScreenChangedEvent?.Invoke(this.currentScreen);
         }
