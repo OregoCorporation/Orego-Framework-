@@ -6,9 +6,9 @@ namespace OregoFramework.Game
     {
         IGameContext currentGameContext { get; }
 
-        void AddForm(IGameInterfaceForm form);
+        void RegisterForm(IGameInterfaceForm form);
 
-        void RemoveForm(IGameInterfaceForm form);
+        void UnregisterForm(IGameInterfaceForm form);
 
         T GetForm<T>() where T : IGameInterfaceForm;
 

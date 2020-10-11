@@ -21,14 +21,14 @@ namespace OregoFramework.Game
             this.formMap = new Dictionary<Type, IGameInterfaceForm>();
         }
 
-        public virtual void AddForm(IGameInterfaceForm form)
+        public virtual void RegisterForm(IGameInterfaceForm form)
         {
             var type = form.GetType();
             this.formMap.Add(type, form);
             form.OnRegistered(this);
         }
 
-        public virtual void RemoveForm(IGameInterfaceForm form)
+        public virtual void UnregisterForm(IGameInterfaceForm form)
         {
             form.OnUnregistered();
             var type = form.GetType();
