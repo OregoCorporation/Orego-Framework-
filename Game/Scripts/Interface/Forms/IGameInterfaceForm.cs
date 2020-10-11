@@ -1,6 +1,6 @@
 namespace OregoFramework.Game
 {
-    public interface IGameView
+    public interface IGameInterfaceForm
     {
         void OnRegistered(IGameInterface gameInterface);
         

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace OregoFramework.Game
 {
-    public abstract class GameView : MonoBehaviour, IGameView
+    public abstract class GameInterfaceForm : MonoBehaviour, IGameInterfaceForm
     {
         protected IGameInterface gameInterface { get; private set; }
 
