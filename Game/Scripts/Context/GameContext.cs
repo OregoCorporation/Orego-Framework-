@@ -108,7 +108,7 @@ namespace OregoFramework.Game
         {
         }
 
-        public virtual void ResumeGame(object sender)
+        public void ResumeGame(object sender)
         {
             this.gameStatus = GameStatus.PLAYING;
             foreach (var node in this.nodes)
@@ -123,7 +123,7 @@ namespace OregoFramework.Game
         {
         }
 
-        public virtual void FinishGame(object sender)
+        public void FinishGame(object sender)
         {
             this.gameStatus = GameStatus.FINISHING;
             foreach (var node in this.nodes)
