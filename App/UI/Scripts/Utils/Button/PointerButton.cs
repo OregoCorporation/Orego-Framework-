@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 namespace OregoFramework.Util
 {
+    /// <summary>
+    ///     <para>Button with pointer observing.</para>
+    /// </summary>
     public class PointerButton : Button
     {
         #region Event

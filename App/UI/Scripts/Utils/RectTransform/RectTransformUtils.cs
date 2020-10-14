@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 namespace OregoFramework.Util
 {
+    /// <summary>
+    ///     <para>Rect transform extensions.</para>
+    /// </summary>
     public static class RectTransformUtils
     {
         #region Const
@@ -68,9 +71,9 @@ namespace OregoFramework.Util
             return new Vector2(rectTransform.GetLeftBorder(), rectTransform.GetBottomBorder());
         }
         
-        public static void RecalculateContainer(this MonoBehaviour behaviour, RectTransform container)
+        public static void RecalculateContainer(this MonoBehaviour behaviour, RectTransform rectTransform)
         {
-            behaviour.StartCoroutine(RecalculateContainerRoutine(container));
+            behaviour.StartCoroutine(RecalculateContainerRoutine(rectTransform));
         }
 
         public static IEnumerator RecalculateContainerRoutine(RectTransform container)

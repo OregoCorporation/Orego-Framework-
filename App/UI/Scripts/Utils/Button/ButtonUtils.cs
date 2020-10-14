@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace OregoFramework.Util
 {
+    /// <summary>
+    ///     <para>Button extensions.</para>
+    /// </summary>
     public static class ButtonUtils
     {
         public static void AddListener(this Button button, UnityAction action)
