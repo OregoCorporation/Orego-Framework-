@@ -1,4 +1,4 @@
-namespace OregoFramework.Util.Gear
+namespace OregoFramework.Game
 {
     public abstract class BaseEventHandler<TEvent> : EventHandler where TEvent : IEvent
     {

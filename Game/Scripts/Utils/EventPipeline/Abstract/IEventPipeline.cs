@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OregoFramework.Util.Gear
+namespace OregoFramework.Game
 {
     public interface IEventPipeline
     {

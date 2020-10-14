@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OregoFramework.Util.Gear
+namespace OregoFramework.Game
 {
     public abstract class EventHandler : MonoBehaviour, IEventHandler
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OregoFramework.Util.Gear
+namespace OregoFramework.Game
 {
     public abstract class BaseEventPipedHandler<TEventPipeId, TEvent> :
         BaseEventHandler<TEvent>,

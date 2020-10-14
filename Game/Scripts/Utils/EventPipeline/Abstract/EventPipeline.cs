@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using OregoFramework.Util;
 using UnityEngine;
 
-namespace OregoFramework.Util.Gear
+namespace OregoFramework.Game
 {
     public abstract class EventPipeline : MonoBehaviour, IEventPipeline
     {
@@ -26,12 +27,12 @@ namespace OregoFramework.Util.Gear
 
         public virtual void AddPipe(IEventPipe pipe)
         {
-            this.pipeMap.AddByType(pipe);
+            this.pipeMap.Add(pipe.GetType(), pipe);
         }
 
         public virtual void RemovePipe(IEventPipe pipe)
         {
-            this.pipeMap.RemoveByType(pipe);
+            this.pipeMap.Remove(pipe.GetType());
         }
 
         public T GetPipe<T>() where T : IEventPipe

@@ -7,8 +7,8 @@ namespace OregoFramework.App
     /// </summary>
     /// 
     /// <typeparam name="K">Dictionary key.</typeparam>
-    /// <typeparam name="T">Dictionary value.</typeparam>
-    public interface IMutableItemMapInteractor<in K, T> : IItemMapInteractor<K, T>
+    /// <typeparam name="V">Dictionary value.</typeparam>
+    public interface IMutableItemMapInteractor<in K, V> : IItemMapInteractor<K, V>
     {
         #region Event
 
@@ -18,7 +18,7 @@ namespace OregoFramework.App
         /// 
         /// <param name="sender">Who is calling this method</param>
         /// <param name="item">An item reference.</param>
-        event Action<object, T> OnItemAddedEvent;
+        event Action<object, V> OnItemAddedEvent;
 
         /// <summary>
         ///     <para>Invoke this event when an item has removed from dictionary.</para>
@@ -26,7 +26,7 @@ namespace OregoFramework.App
         /// 
         /// <param name="sender">Who is calling this method</param>
         /// <param name="item">An item reference.</param>
-        event Action<object, T> OnItemRemovedEvent;
+        event Action<object, V> OnItemRemovedEvent;
 
         #endregion
 
@@ -37,7 +37,7 @@ namespace OregoFramework.App
         /// 
         /// <param name="sender">Who is calling this method.</param>
         /// <param name="item">An item reference.</param>
-        void NotifyAboutItemAdded(object sender, T item);
+        void NotifyAboutItemAdded(object sender, V item);
 
         /// <summary>
         ///     <para>Broadcasts event that item has removed from dictionary.</para>
@@ -46,6 +46,6 @@ namespace OregoFramework.App
         /// 
         /// <param name="sender">Who is calling this method.</param>
         /// <param name="item">An item reference.</param>
-        void NotifyAboutItemRemoved(object sender, T item);
+        void NotifyAboutItemRemoved(object sender, V item);
     }
 }

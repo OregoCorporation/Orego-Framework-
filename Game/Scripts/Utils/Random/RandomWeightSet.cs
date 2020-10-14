@@ -4,10 +4,6 @@ using System.Linq;
 
 namespace OregoFramework.Util
 {
-    /// <summary>
-    ///     <para>Experimental.</para>
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
     public sealed class RandomWeightSet<T>
     {
         private readonly Random random;
@@ -47,7 +43,8 @@ namespace OregoFramework.Util
         {
             if (this.elements.Add(element))
             {
-                this.sum += this.getWeightFunc.Invoke(element);
+                var weight = this.getWeightFunc.Invoke(element);
+                this.sum += weight;
             }
         }
 
@@ -55,7 +52,8 @@ namespace OregoFramework.Util
         {
             if (this.elements.Remove(element))
             {
-                this.sum -= this.getWeightFunc.Invoke(element);
+                var weight = this.getWeightFunc.Invoke(element);
+                this.sum -= weight;
             }
         }
 

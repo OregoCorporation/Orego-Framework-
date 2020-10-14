@@ -1,4 +1,4 @@
-namespace OregoFramework.Util.Gear
+namespace OregoFramework.Game
 {
     public interface IEventHandler
     {

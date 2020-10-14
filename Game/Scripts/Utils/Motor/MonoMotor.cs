@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace OregoFramework.Util
 {
-    public sealed class MonoMotor : MonoBehaviour, IMotor
+    public sealed class MonoMotor : MonoBehaviour
     {
         public float absMaxSpeed { get; set; }
 

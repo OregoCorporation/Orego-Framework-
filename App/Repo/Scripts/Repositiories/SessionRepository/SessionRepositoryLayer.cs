@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Elementary;
 
 namespace OregoFramework.App
 {
@@ -7,28 +8,48 @@ namespace OregoFramework.App
     public abstract class SessionRepositoryLayer : RepositoryLayer, ISessionRepositoryLayer
     {
         #region Event
-        
+
         /// <summary>
         ///     <inheritdoc cref="ISessionRepositoryLayer.OnSessionBeganEvent"/>
         /// </summary>
         public event Action OnSessionBeganEvent;
-        
+
         /// <summary>
         ///     <inheritdoc cref="ISessionRepositoryLayer.OnSessionEndedEvent"/>
         /// </summary>
         public event Action OnSessionEndedEvent;
-        
+
         #endregion
 
         /// <summary>
         ///     <para>A session started or not.</para>
         /// </summary>
         public bool isActiveSession { get; protected set; }
-        
+
+        /// <summary>
+        ///     <para>Check for updates user data when a user session starts.</para>
+        /// </summary>
+        protected IUpdateDataSystem updateDataSystem { get; set; }
+
+        protected sealed override void OnCreate(
+            ElementLayer<IRepository> _,
+            IElementContext context
+        )
+        {
+            this.updateDataSystem = this.CreateUpdateDataSystem();
+            this.OnCreate(this, context);
+        }
+
+        protected abstract IUpdateDataSystem CreateUpdateDataSystem();
+
+        protected virtual void OnCreate(SessionRepositoryLayer _, IElementContext context)
+        {
+        }
+
         /// <inheritdoc cref="ISessionRepositoryLayer.BeginSession"/>
         public IEnumerator BeginSession()
         {
-            yield return this.OnBeforeBeginSession();
+            yield return this.updateDataSystem.CheckForUpdates();
             var repositories = this.GetRepositories<ISessionRepository>();
             foreach (var repository in repositories)
             {
@@ -36,22 +57,11 @@ namespace OregoFramework.App
             }
 
             this.isActiveSession = true;
-            yield return this.OnAfterBeginSession();
+            yield return this.OnBeginSession();
             this.OnSessionBeganEvent?.Invoke();
         }
-
-        /// <summary>
-        ///     <para>Called before repositories are initialized.</para>
-        /// </summary>
-        protected virtual IEnumerator OnBeforeBeginSession()
-        {
-            yield break;
-        }
-
-        /// <summary>
-        ///     <para>Called after repositories are initialized.</para>
-        /// </summary>
-        protected virtual IEnumerator OnAfterBeginSession()
+        
+        protected virtual IEnumerator OnBeginSession()
         {
             yield break;
         }

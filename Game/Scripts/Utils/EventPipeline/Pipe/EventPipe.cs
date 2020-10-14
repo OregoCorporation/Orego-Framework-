@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using OregoFramework.Util;
 using UnityEngine;
 
-namespace OregoFramework.Util.Gear
+namespace OregoFramework.Game
 {
     public abstract class EventPipe : MonoBehaviour, IEventPipe
     {

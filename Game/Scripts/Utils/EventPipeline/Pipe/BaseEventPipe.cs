@@ -1,4 +1,4 @@
-namespace OregoFramework.Util.Gear
+namespace OregoFramework.Game
 {
     public abstract class BaseEventPipe<E> : EventPipe
         where E : IEvent

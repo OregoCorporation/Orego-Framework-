@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace OregoFramework.Util.Gear
+namespace OregoFramework.Game
 {
     public interface IPipedEventHandler<in TEventPipeId> : IEventHandler
     {
