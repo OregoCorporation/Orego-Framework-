@@ -4,6 +4,9 @@ using OregoFramework.Util;
 
 namespace OregoFramework.App
 {
+    /// <summary>
+    ///     <para>A screen controller with previous screen stack.</para>
+    /// </summary>
     public abstract class UICachedScreenController : UIScreenController
     {
         private readonly Stack<Type> previousScreenStack;

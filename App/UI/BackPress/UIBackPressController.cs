@@ -4,6 +4,9 @@ using OregoFramework.Util;
 
 namespace OregoFramework.App
 {
+    /// <summary>
+    ///     <para>Controls back press actions.</para>
+    /// </summary>
     public abstract class UIBackPressController : UIElement
     {
         protected readonly Stack<Action> onBackPressActionStack;
@@ -13,19 +16,19 @@ namespace OregoFramework.App
             this.onBackPressActionStack = new Stack<Action>();
         }
 
-        public void TakeBackPressAction(Action backPressAction)
+        public void FocusAction(Action backPressAction)
         {
             this.onBackPressActionStack.Push(backPressAction);
         }
 
-        public void ReleaseBackPressAction(Action backPressAction)
+        public void ReleaseAction(Action backPressAction)
         {
             while (this.onBackPressActionStack.Pop() != backPressAction)
             {
             }
         }
 
-        protected virtual void OnBackPressed()
+        public void BackPress()
         {
             if (this.onBackPressActionStack.IsNotEmpty())
             {

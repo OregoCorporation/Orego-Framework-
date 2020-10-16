@@ -11,8 +11,7 @@ namespace OregoFramework.App
         ///     <para>Is <see cref="_parent"/> is null or not.</para>
         /// </summary>
         private bool parentProvided;
-
-
+        
         /// <summary>
         ///     <para>An UI screen controller reference.</para>
         /// </summary>
