@@ -5,7 +5,7 @@ using UnityEngine;
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>The base class from which every UI script derives.</para>
+    ///     <para>An element of UI System <see cref="UISystem"/>.</para>
     /// </summary>
     public abstract class UIElement : MonoBehaviour
     {
@@ -101,16 +101,16 @@ namespace OregoFramework.App
             return this.interactorLayer.GetInteractors<T>();
         }
         
-        /// <inheritdoc cref="UISystem.GetController{T}"/>
-        protected T GetController<T>() where T : UISystem.IController
+        /// <inheritdoc cref="UISystem.GetUIElement{T}"/>
+        protected T GetUIElement<T>() where T : UIElement
         {
-            return this.uiSystem.GetController<T>();
+            return this.uiSystem.GetUIElement<T>();
         }
 
-        /// <inheritdoc cref="UISystem.GetControllers{T}"/>
-        protected IEnumerable<T> GetControllers<T>() where T : UISystem.IController
+        /// <inheritdoc cref="UISystem.GetUIElements{T}"/>
+        protected IEnumerable<T> GetUIElements<T>() where T : UIElement
         {
-            return this.uiSystem.GetControllers<T>();
+            return this.uiSystem.GetUIElements<T>();
         }
     }
 }

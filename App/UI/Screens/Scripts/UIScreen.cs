@@ -3,7 +3,7 @@ using System;
 namespace OregoFramework.App
 {
     /// <summary>
-    ///     <para>UIScreen is an UI state of application screen.</para>
+    ///     <para>UIScreen is an state of application screen.</para>
     /// </summary>
     public abstract class UIScreen : UIElement
     {
@@ -38,7 +38,7 @@ namespace OregoFramework.App
         /// </summary>
         /// <param name="sender">Who has started this screen.</param>
         /// <param name="transition">Input args.</param>
-        public virtual void OnLoaded(object sender, IUIScreenTransition transition = null)
+        public virtual void OnLoaded(object sender, UIScreenTransition transition = null)
         {
         }
 
@@ -51,13 +51,13 @@ namespace OregoFramework.App
         }
 
         /// <inheritdoc cref="UIScreenController.ChangeScreen"/>
-        protected void ChangeScreen<T>(IUIScreenTransition transition = null) where T : UIScreen
+        protected void ChangeScreen<T>(UIScreenTransition transition = null) where T : UIScreen
         {
             this.ChangeScreen(typeof(T), transition);
         }
         
         /// <inheritdoc cref="UIScreenController.ChangeScreen"/>
-        protected void ChangeScreen(Type screenType, IUIScreenTransition transition = null)
+        protected void ChangeScreen(Type screenType, UIScreenTransition transition = null)
         {
             this.parent.ChangeScreen(this, screenType, transition);
         }

@@ -4,7 +4,7 @@ using OregoFramework.Util;
 
 namespace OregoFramework.App
 {
-    public abstract class UIBackPressController : UIElement, UISystem.IController
+    public abstract class UIBackPressController : UIElement
     {
         protected readonly Stack<Action> onBackPressActionStack;
 
@@ -32,24 +32,6 @@ namespace OregoFramework.App
                 var currentBackPressAction = this.onBackPressActionStack.Peek();
                 currentBackPressAction?.Invoke();
             }
-        }
-
-        void UISystem.IController.OnRegistered()
-        {
-            this.OnRegistered();
-        }
-
-        protected virtual void OnRegistered()
-        {
-        }
-
-        void UISystem.IController.OnUnregistered()
-        {
-            this.OnUnregistered();
-        }
-
-        protected virtual void OnUnregistered()
-        {
         }
     }
 }

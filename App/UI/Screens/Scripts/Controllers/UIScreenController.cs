@@ -8,7 +8,7 @@ namespace OregoFramework.App
     /// <summary>
     ///     <para>Controls UI screens. <see cref="UIScreen"/>.</para>
     /// </summary>
-    public abstract class UIScreenController : UIElement, UISystem.IController
+    public abstract class UIScreenController : UIElement
     {
         #region Event
 
@@ -94,7 +94,7 @@ namespace OregoFramework.App
         public virtual void ChangeScreen(
             object sender,
             Type screenType,
-            IUIScreenTransition transition = null
+            UIScreenTransition transition = null
         )
         {
             var previousScreen = this.currentScreen;
@@ -125,23 +125,5 @@ namespace OregoFramework.App
         }
 
         #endregion
-
-        void UISystem.IController.OnRegistered()
-        {
-            this.OnRegistered();
-        }
-
-        protected virtual void OnRegistered()
-        {
-        }
-
-        void UISystem.IController.OnUnregistered()
-        {
-            this.OnUnregistered();
-        }
-
-        protected virtual void OnUnregistered()
-        {
-        }
     }
 }
