@@ -9,18 +9,29 @@ namespace OregoFramework.App
     /// </summary>
     public abstract class UIBackPressController : UIElement
     {
+        /// <summary>
+        ///     <para>Keeps back press actions.</para>
+        /// </summary>
         protected readonly Stack<Action> onBackPressActionStack;
 
         public UIBackPressController()
         {
             this.onBackPressActionStack = new Stack<Action>();
         }
-
+        
+        /// <summary>
+        ///     <para>Push back press action into head of stack.</para>
+        /// </summary>
+        /// <param name="backPressAction">Back press action</param>
         public void FocusAction(Action backPressAction)
         {
             this.onBackPressActionStack.Push(backPressAction);
         }
 
+        /// <summary>
+        ///     <para>Pop back press action from head of stack.</para>
+        /// </summary>
+        /// <param name="backPressAction">Back press action</param>
         public void ReleaseAction(Action backPressAction)
         {
             while (this.onBackPressActionStack.Pop() != backPressAction)
@@ -28,12 +39,15 @@ namespace OregoFramework.App
             }
         }
 
+        /// <summary>
+        ///     <para>Invokes head back press action in back press stack</para>
+        /// </summary>
         public void BackPress()
         {
             if (this.onBackPressActionStack.IsNotEmpty())
             {
-                var currentBackPressAction = this.onBackPressActionStack.Peek();
-                currentBackPressAction?.Invoke();
+                var headBackPressAction = this.onBackPressActionStack.Peek();
+                headBackPressAction?.Invoke();
             }
         }
     }
