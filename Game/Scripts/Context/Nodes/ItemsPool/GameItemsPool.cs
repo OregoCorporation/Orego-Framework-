@@ -3,13 +3,13 @@ using OregoFramework.Util;
 
 namespace OregoFramework.Game
 {
-    public abstract class GameItemPool<T> : GameItemManager<T>, IGameItemPool<T>
+    public abstract class GameItemsPool<T> : GameItemsManager<T>, IGameItemsPool<T>
     {
         protected List<T> availableItems { get; }
 
         #region Lifecycle
 
-        protected GameItemPool()
+        protected GameItemsPool()
         {
             this.availableItems = new List<T>();
         }
@@ -20,7 +20,7 @@ namespace OregoFramework.Game
             this.OnRegisterItem(this, item);
         }
 
-        protected virtual void OnRegisterItem(GameItemPool<T> _, T item)
+        protected virtual void OnRegisterItem(GameItemsPool<T> _, T item)
         {
         }
 
@@ -30,7 +30,7 @@ namespace OregoFramework.Game
             this.OnUnregisterItem(this, item);
         }
 
-        protected virtual void OnUnregisterItem(GameItemPool<T> _, T item)
+        protected virtual void OnUnregisterItem(GameItemsPool<T> _, T item)
         {
         }
 
@@ -56,11 +56,6 @@ namespace OregoFramework.Game
         public bool IsEmpty()
         {
             return this.availableItems.IsEmpty();
-        }
-
-        public bool IsNotEmpty()
-        {
-            return this.availableItems.IsNotEmpty();
         }
     }
 }

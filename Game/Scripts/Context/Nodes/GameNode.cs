@@ -2,10 +2,15 @@ using UnityEngine;
 
 namespace OregoFramework.Game
 {
+    /// <inheritdoc cref="IGameNode"/>
     public abstract class GameNode : MonoBehaviour, IGameNode
     {
+        /// <summary>
+        ///     <para>A parent game system reference.</para>
+        /// </summary>
         protected IGameContext gameContext { get; private set; }
 
+        /// <inheritdoc cref="IGameNode.OnRegistered"/>
         public void OnRegistered(IGameContext gameContext)
         {
             this.gameContext = gameContext;
@@ -16,75 +21,43 @@ namespace OregoFramework.Game
         {
         }
 
-        public void OnPrepareGame(object sender)
-        {
-            this.OnPrepareGame(this, sender);
-        }
-        
-        protected virtual void OnPrepareGame(GameNode _, object sender)
+        /// <inheritdoc cref="IGameNode.OnPrepareGame"/>
+        public virtual void OnPrepareGame(object sender)
         {
         }
 
-        public void OnReadyGame(object sender)
-        {
-            this.OnReadyGame(this, sender);
-        }
-
-        protected virtual void OnReadyGame(GameNode _, object sender)
+        /// <inheritdoc cref="IGameNode.OnReadyGame"/>
+        public virtual void OnReadyGame(object sender)
         {
         }
 
-        public void OnStartGame(object sender)
-        {
-            this.OnStartGame(this, sender);
-        }
-
-        protected virtual void OnStartGame(GameNode _, object sender)
+        /// <inheritdoc cref="IGameNode.OnStartGame"/>
+        public virtual void OnStartGame(object sender)
         {
         }
 
-        public void OnPauseGame(object sender)
-        {
-            this.OnPauseGame(this, sender);
-        }
-        
-        protected virtual void OnPauseGame(GameNode _, object sender)
+        /// <inheritdoc cref="IGameNode.OnPauseGame"/>
+        public virtual void OnPauseGame(object sender)
         {
         }
 
-        public void OnResumeGame(object sender)
-        {
-            this.OnResumeGame(this, sender);
-        }
-
-        protected virtual void OnResumeGame(GameNode _, object sender)
+        /// <inheritdoc cref="IGameNode.OnResumeGame"/>
+        public virtual void OnResumeGame(object sender)
         {
         }
 
-        public void OnFinishGame(object sender)
-        {
-            this.OnFinishGame(this, sender);
-        }
-
-        protected virtual void OnFinishGame(GameNode _, object sender)
+        /// <inheritdoc cref="IGameNode.OnFinishGame"/>
+        public virtual void OnFinishGame(object sender)
         {
         }
 
-        public void OnDestroyGame(object sender)
-        {
-            this.OnDestroyGame(this, sender);
-        }
-
-        protected virtual void OnDestroyGame(GameNode _, object sender)
+        /// <inheritdoc cref="IGameNode.OnDestroyGame"/>
+        public virtual void OnDestroyGame(object sender)
         {
         }
 
-        public void OnUnregistered()
-        {
-            this.OnUnregistered(this);
-        }
-
-        protected virtual void OnUnregistered(GameNode _)
+        /// <inheritdoc cref="IGameNode.OnDestroyGame"/>
+        public virtual void OnUnregistered()
         {
         }
     }

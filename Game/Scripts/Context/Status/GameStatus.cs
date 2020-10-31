@@ -1,5 +1,8 @@
 namespace OregoFramework.Game
 {
+    /// <summary>
+    ///     <para>A lifecycle status of game context.</para>
+    /// </summary>
     public enum GameStatus
     {
         CREATING = 0,

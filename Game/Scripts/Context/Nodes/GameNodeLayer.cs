@@ -4,23 +4,29 @@ using OregoFramework.Util;
 
 namespace OregoFramework.Game
 {
+    /// <inheritdoc cref="IGameNodeLayer"/>
     public abstract class GameNodeLayer : GameNode, IGameNodeLayer
     {
-        private readonly Dictionary<Type, IGameNode> nodeMap;
+        /// <summary>
+        ///     <para>Map of unique registered game components.
+        ///     Key: a node type, Value: a node instance.</para>
+        /// </summary>
+        private readonly Dictionary<Type, IGameNode> registeredNodeMap;
 
-        private IEnumerable<IGameNode> nodes
+        protected IEnumerable<IGameNode> registeredNodes
         {
-            get { return this.nodeMap.Values; }
+            get { return this.registeredNodeMap.Values; }
         }
 
         protected GameNodeLayer()
         {
-            this.nodeMap = new Dictionary<Type, IGameNode>();
+            this.registeredNodeMap = new Dictionary<Type, IGameNode>();
         }
 
-        protected sealed override void OnPrepareGame(GameNode _, object sender)
+        /// <inheritdoc cref="IGameNode.OnPrepareGame"/>
+        public sealed override void OnPrepareGame(object sender)
         {
-            foreach (var node in this.nodes)
+            foreach (var node in this.registeredNodes)
             {
                 node.OnPrepareGame(sender);
             }
@@ -32,9 +38,10 @@ namespace OregoFramework.Game
         {
         }
 
-        protected sealed override void OnReadyGame(GameNode _, object sender)
+        /// <inheritdoc cref="IGameNode.OnReadyGame"/>
+        public sealed override void OnReadyGame(object sender)
         {
-            foreach (var node in this.nodes)
+            foreach (var node in this.registeredNodes)
             {
                 node.OnReadyGame(sender);
             }
@@ -46,9 +53,10 @@ namespace OregoFramework.Game
         {
         }
 
-        protected sealed override void OnStartGame(GameNode _, object sender)
+        /// <inheritdoc cref="IGameNode.OnStartGame"/>
+        public sealed override void OnStartGame(object sender)
         {
-            foreach (var node in this.nodes)
+            foreach (var node in this.registeredNodes)
             {
                 node.OnStartGame(sender);
             }
@@ -60,9 +68,10 @@ namespace OregoFramework.Game
         {
         }
 
-        protected sealed override void OnPauseGame(GameNode _, object sender)
+        /// <inheritdoc cref="IGameNode.OnPauseGame"/>
+        public sealed override void OnPauseGame(object sender)
         {
-            foreach (var node in this.nodes)
+            foreach (var node in this.registeredNodes)
             {
                 node.OnPauseGame(sender);
             }
@@ -74,9 +83,10 @@ namespace OregoFramework.Game
         {
         }
 
-        protected sealed override void OnResumeGame(GameNode _, object sender)
+        /// <inheritdoc cref="IGameNode.OnResumeGame"/>
+        public sealed override void OnResumeGame(object sender)
         {
-            foreach (var node in this.nodes)
+            foreach (var node in this.registeredNodes)
             {
                 node.OnResumeGame(sender);
             }
@@ -88,9 +98,10 @@ namespace OregoFramework.Game
         {
         }
 
-        protected sealed override void OnFinishGame(GameNode _, object sender)
+        /// <inheritdoc cref="IGameNode.OnFinishGame"/>
+        public sealed override void OnFinishGame(object sender)
         {
-            foreach (var node in this.nodes)
+            foreach (var node in this.registeredNodes)
             {
                 node.OnFinishGame(sender);
             }
@@ -102,26 +113,30 @@ namespace OregoFramework.Game
         {
         }
 
+        /// <inheritdoc cref="IGameNodeLayer.GetNode{T}"/>
         public T GetNode<T>() where T : IGameNode
         {
-            return this.nodeMap.Find<T, IGameNode>();
+            return this.registeredNodeMap.Find<T, IGameNode>();
         }
 
+        /// <inheritdoc cref="IGameNodeLayer.GetNodes{T}"/>
         public IEnumerable<T> GetNodes<T>() where T : IGameNode
         {
-            return this.nodeMap.FindAll<T, IGameNode>();
+            return this.registeredNodeMap.FindAll<T, IGameNode>();
         }
 
+        /// <inheritdoc cref="IGameNodeLayer.RegisterNode"/>
         public void RegisterNode(IGameNode gameNode)
         {
-            this.nodeMap.AddByType(gameNode);
+            this.registeredNodeMap.AddByType(gameNode);
             gameNode.OnRegistered(this.gameContext);
         }
 
+        /// <inheritdoc cref="IGameNodeLayer.UnregisterNode"/>
         public void UnregisterNode(IGameNode gameNode)
         {
             gameNode.OnUnregistered();
-            this.nodeMap.RemoveByType(gameNode);
+            this.registeredNodeMap.RemoveByType(gameNode);
         }
     }
 }
