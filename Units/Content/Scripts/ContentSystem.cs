@@ -4,7 +4,7 @@ using Elementary;
 
 namespace OregoFramework.Unit
 {
-    public abstract class ContentLayer : ElementLayer<IContent>, IRootElement
+    public abstract class ContentSystem : ElementLayer<IContent>, IRootElement
     {
         #region Event
 
@@ -12,7 +12,7 @@ namespace OregoFramework.Unit
 
         #endregion
 
-        private static ContentLayer instance;
+        private static ContentSystem instance;
 
         protected sealed override void OnCreate(ElementLayer<IContent> _, IElementContext context)
         {
@@ -20,7 +20,7 @@ namespace OregoFramework.Unit
             this.OnCreate(this);
         }
 
-        protected virtual void OnCreate(ContentLayer _)
+        protected virtual void OnCreate(ContentSystem _)
         {
         }
 
@@ -32,10 +32,10 @@ namespace OregoFramework.Unit
 
         protected IEnumerator LoadResourcesInternal()
         {
-            var elements = this.GetElements<IContent>();
-            foreach (var section in elements)
+            var contentSet = this.GetElements<IContent>();
+            foreach (var content in contentSet)
             {
-                yield return section.LoadResources();
+                yield return content.LoadResources();
             }
         }
 

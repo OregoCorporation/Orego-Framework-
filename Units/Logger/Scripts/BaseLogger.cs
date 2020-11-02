@@ -6,11 +6,11 @@ namespace OregoFramework.Unit
     {
         #region Log
 
-        protected sealed override void Log(LogArgs logArgs)
+        protected sealed override void LogInternal(LogArgs args)
         {
-            if (this.CanLog(logArgs))
+            if (this.CanLog(args))
             {
-                var message = logArgs.message;
+                var message = args.message;
                 Debug.Log(message);
             }
         }

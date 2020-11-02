@@ -14,12 +14,15 @@ namespace OregoFramework.Unit
 
         #endregion
 
-        #region Lifecycle
-
+        protected static Logger instance;
+        
         private LoggerConfig config;
+
+        #region Lifecycle
 
         protected sealed override void OnCreate(Element _, IElementContext context)
         {
+            instance = this;
             var asset = Resources.Load<LoggerConfig>(CONFIG_NAME);
             this.config = ScriptableObject.Instantiate(asset);
             this.OnCreate(this);
@@ -41,7 +44,12 @@ namespace OregoFramework.Unit
 
         #endregion
 
-        protected abstract void Log(LogArgs logArgs);
+        public static void Log(LogArgs args)
+        {
+            instance.LogInternal(args);
+        }
+
+        protected abstract void LogInternal(LogArgs args);
 
         protected T GetConfig<T>() where T : LoggerConfig
         {
