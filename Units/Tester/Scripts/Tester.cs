@@ -6,18 +6,18 @@ namespace OregoFramework.Unit
 {
     public abstract class Tester
     {
-        private IElementContext _context;
+        private IElementContext _elementaryContext;
         
-        private IElementContext context
+        private IElementContext elementaryContext
         {
             get
             {
-                if (this._context == null)
+                if (this._elementaryContext == null)
                 {
-                    this._context = this.ProvideContext();
+                    this._elementaryContext = this.ProvideElementaryContext();
                 }
 
-                return this._context;
+                return this._elementaryContext;
             }
         }
 
@@ -30,7 +30,7 @@ namespace OregoFramework.Unit
             {
                 if (this._applicationFrame == null)
                 {
-                    this._applicationFrame = this.context.GetRootElement<IApplicationFrame>();
+                    this._applicationFrame = this.elementaryContext.GetRootElement<IApplicationFrame>();
                 }
 
                 return this._applicationFrame;
@@ -82,7 +82,7 @@ namespace OregoFramework.Unit
             }
         }
         
-        protected abstract IElementContext ProvideContext();
+        protected abstract IElementContext ProvideElementaryContext();
 
         protected T GetDatabase<T>() where T : IDatabase
         {

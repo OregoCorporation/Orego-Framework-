@@ -4,7 +4,7 @@ using UnityEngine;
 namespace OregoFramework.Unit
 {
     [Serializable]
-    public class TimeScale
+    public sealed class TimeScale
     {
         [SerializeField]
         public float value;
