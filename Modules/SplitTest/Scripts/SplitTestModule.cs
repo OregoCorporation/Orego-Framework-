@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Orego.Utils;
 using OregoFramework.Util;
+using OregoFramework.Utils;
 using UnityEngine;
 
-namespace Orego.Module
+namespace OregoFramework.Module
 {
     public abstract class SplitTestModule : UnitySingleton<SplitTestModule>
     {

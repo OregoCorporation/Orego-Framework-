@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Orego.Utils;
+using OregoFramework.Utils;
 using UnityEngine;
 
 namespace OregoFramework.Module

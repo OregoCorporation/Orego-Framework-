@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Orego.Module
+namespace OregoFramework.Module
 {
     [Serializable]
     public sealed class SplitTest

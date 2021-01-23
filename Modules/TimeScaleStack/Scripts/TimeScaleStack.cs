@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Elementary;
-using Orego.Utils;
+using OregoFramework.Utils;
 using OregoFramework.Util;
 using UnityEngine;
 
