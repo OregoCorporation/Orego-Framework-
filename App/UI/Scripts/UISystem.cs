@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Elementary;
 using OregoFramework.Util;
 using UnityEngine;
@@ -64,7 +65,7 @@ namespace OregoFramework.App
         /// </summary>
         public T GetUIElement<T>() where T : UIElement
         {
-            return this.RegisteredElements.Find<T, UIElement>();
+            return DictionaryHelper.Find<T, UIElement>(this.RegisteredElements);
         }
 
         /// <summary>
@@ -72,7 +73,7 @@ namespace OregoFramework.App
         /// </summary>
         public IEnumerable<T> GetUIElements<T>() where T : UIElement
         {
-            return this.RegisteredElements.FindAll<T, UIElement>();
+            return this.RegisteredElements.Values.OfType<T>();
         }
 
         public IEnumerator<UIElement> GetEnumerator()
@@ -88,5 +89,9 @@ namespace OregoFramework.App
         {
             return this.GetEnumerator();
         }
+        
+        
+        
+      
     }
 }

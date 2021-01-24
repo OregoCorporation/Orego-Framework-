@@ -115,7 +115,7 @@ namespace OregoFramework.App
 
         protected virtual UIScreen LoadScreen(Type screenType)
         {
-            var path = this.ScreenPathMap.Find(screenType);
+            var path = DictionaryHelper.Find(this.ScreenPathMap, screenType);
             var prefab = Resources.Load<UIScreen>(path);
             var nextScreen = Instantiate(prefab, this.RootTransform);
             return nextScreen;
