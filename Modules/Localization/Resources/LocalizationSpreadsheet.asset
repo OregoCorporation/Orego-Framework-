@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2dbdab98e2489a49a3ef6dfe564537f, type: 3}
+  m_Name: LocalizationSpreadsheet
+  m_EditorClassIdentifier: 
+  uri: https://docs.google.com/spreadsheets/d/1eY1kM2ozQsbsKjAgLZ5ZDRx3ffB4KJnmOE-BnSklUiI
+  pages:
+  - id: Gameplay
+    dictionaries:
+    - language: English
+      entities:
+      - key: TXT_MOVE
+        translation: MOVE
+      - key: TXT_TURN
+        translation: TURN
+      - key: TXT_ATTACK
+        translation: ATTACK
+    - language: Russian
+      entities:
+      - key: TXT_MOVE
+        translation: "\u0414\u0412\u0418\u0416\u0415\u041D\u0418\u0415"
+      - key: TXT_TURN
+        translation: "\u041F\u041E\u0412\u041E\u0420\u041E\u0422"
+      - key: TXT_ATTACK
+        translation: "\u041E\u0413\u041E\u041D\u042C!"
+  - id: Common
+    dictionaries:
+    - language: English
+      entities:
+      - key: TXT_NEXT
+        translation: NEXT
+      - key: TXT_LOADING...
+        translation: LOADING...
+      - key: TXT_RESTART
+        translation: RESTART
+      - key: TXT_GET
+        translation: GET
+      - key: TXT_CONGRATULATIONS_TITLE
+        translation: CONGRATULATIONS
+      - key: TXT_CONGRATULATIONS_HEADER
+        translation: 'You have won all enemies
+
+          and reached the end!'
+    - language: Russian
+      entities:
+      - key: TXT_NEXT
+        translation: "\u0414\u0410\u041B\u0415\u0415"
+      - key: TXT_LOADING...
+        translation: "\u0417\u0410\u0413\u0420\u0423\u0417\u041A\u0410..."
+      - key: TXT_RESTART
+        translation: "\u0420\u0415\u0421\u0422\u0410\u0420\u0422"
+      - key: TXT_GET
+        translation: "\u041F\u041E\u041B\u0423\u0427\u0418\u0422\u042C"
+      - key: TXT_CONGRATULATIONS_TITLE
+        translation: "\u041F\u041E\u0417\u0414\u0420\u0410\u0412\u041B\u042F\u0415\u041C"
+      - key: TXT_CONGRATULATIONS_HEADER
+        translation: "\u0412\u044B \u043F\u043E\u0431\u0435\u0434\u0438\u043B\u0438
+          \u0432\u0441\u0435\u0445 \u0432\u0440\u0430\u0433\u043E\u0432 \u0438 \u043F\u0440\u043E\u0448\u043B\u0438
+          \u0444\u0438\u043D\u0430\u043B\u044C\u043D\u044B\u0439 \u0443\u0440\u043E\u0432\u0435\u043D\u044C!"
+  - id: Levels
+    dictionaries:
+    - language: English
+      entities:
+      - key: TXT_TUTORIAL
+        translation: TUTORIAL
+      - key: TXT_DESTROY_MINES
+        translation: DESTROY THE MINES
+      - key: TXT_DESTROY_ENEMIES
+        translation: DESTROY THE ENEMIES
+      - key: TXT_LEVEL
+        translation: LEVEL
+      - key: TXT_DESTROY_THE_HEADQUARTERS
+        translation: DESTROY THE HEADQUARTERS
+      - key: TXT_KILL_BOSS
+        translation: KILL THE BOSS!
+      - key: TXT_ STOP_ENEMY_TRUCK
+        translation: STOP THE ENEMY TRUCK
+      - key: TXT_TURNS_LEFT
+        translation: TURNS LEFT
+      - key: TXT_TAKE_ENEMY_MAP
+        translation: TAKE THE ENEMY MAP
+      - key: TXT_PROTECT_ALLY_TRUCK
+        translation: PROTECT THE ALLY TRUCK
+      - key: TXT_PROTECT_HEADQUARTERS
+        translation: PROTECT THE HEADQUARTERS
+      - key: TXT_ STOP_ENEMY_TRUCKS
+        translation: STOP THE ENEMY TRUCKS
+      - key: TXT_PROTECT_ANY_HOUSE
+        translation: PROTECT ANY HOUSE!
+      - key: TXT_COLLECT_FUEL
+        translation: COLLECT THE FUEL
+      - key: TXT_DESTROY_TANKS
+        translation: DESTROY THE TANKS
+    - language: Russian
+      entities:
+      - key: TXT_TUTORIAL
+        translation: "\u041F\u041E\u041B\u0418\u0413\u041E\u041D"
+      - key: TXT_DESTROY_MINES
+        translation: "\u0423\u041D\u0418\u0427\u0422\u041E\u0416\u0418\u0422\u042C
+          \u041C\u0418\u041D\u042B"
+      - key: TXT_DESTROY_ENEMIES
+        translation: "\u0423\u041D\u0418\u0427\u0422\u041E\u0416\u0418\u0422\u042C
+          \u041F\u0420\u041E\u0422\u0418\u0412\u041D\u0418\u041A\u041E\u0412"
+      - key: TXT_LEVEL
+        translation: "\u0423\u0420\u041E\u0412\u0415\u041D\u042C"
+      - key: TXT_DESTROY_THE_HEADQUARTERS
+        translation: "\u0423\u041D\u0418\u0427\u0422\u041E\u0416\u0418\u0422\u042C
+          \u0428\u0422\u0410\u0411"
+      - key: TXT_KILL_BOSS
+        translation: "\u0423\u041D\u0418\u0427\u0422\u041E\u0416\u0418\u0422\u042C
+          \u0411\u041E\u0421\u0421\u0410!"
+      - key: TXT_ STOP_ENEMY_TRUCK
+        translation: "\u041E\u0421\u0422\u0410\u041D\u041E\u0412\u0418\u0422\u042C
+          \u0422\u0420\u0410\u041D\u0421\u041F\u041E\u0420\u0422\u0415\u0420"
+      - key: TXT_TURNS_LEFT
+        translation: "\u041E\u0421\u0422\u0410\u041B\u041E\u0421\u042C \u0425\u041E\u0414\u041E\u0412"
+      - key: TXT_TAKE_ENEMY_MAP
+        translation: "\u0417\u0410\u0411\u0420\u0410\u0422\u042C \u041A\u0410\u0420\u0422\u0423
+          \u041F\u0420\u041E\u0422\u0418\u0412\u041D\u0418\u041A\u0410"
+      - key: TXT_PROTECT_ALLY_TRUCK
+        translation: "\u0417\u0410\u0429\u0418\u0422\u0418\u0422\u042C \u0422\u0420\u0410\u041D\u0421\u041F\u041E\u0420\u0422\u0415\u0420"
+      - key: TXT_PROTECT_HEADQUARTERS
+        translation: "\u0417\u0410\u0429\u0418\u0422\u0418\u0422\u042C \u0428\u0422\u0410\u0411"
+      - key: TXT_ STOP_ENEMY_TRUCKS
+        translation: "\u041E\u0421\u0422\u0410\u041D\u041E\u0412\u0418\u0422\u042C
+          \u0422\u0420\u0410\u041D\u0421\u041F\u041E\u0420\u0422\u0415\u0420\u042B"
+      - key: TXT_PROTECT_ANY_HOUSE
+        translation: "\u0417\u0410\u0429\u0418\u0422\u0418\u0422\u042C \u041B\u042E\u0411\u041E\u0419
+          \u0414\u041E\u041C\u0418\u041A"
+      - key: TXT_COLLECT_FUEL
+        translation: "\u0421\u041E\u0411\u0420\u0410\u0422\u042C \u0422\u041E\u041F\u041B\u0418\u0412\u041E"
+      - key: TXT_DESTROY_TANKS
+        translation: "\u0423\u041D\u0418\u0427\u0422\u041E\u0416\u0418\u0422\u042C
+          \u0422\u0410\u041D\u041A\u0418"
