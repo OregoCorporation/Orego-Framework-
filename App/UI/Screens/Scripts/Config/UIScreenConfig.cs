@@ -19,21 +19,19 @@ namespace OregoFramework.App
         [FormerlySerializedAs("array")]
         [SerializeField]
         public ScreenInfo[] Array;
-        
+
         /// <summary>
         ///     <para>A screen metadata.</para>
         /// </summary>
         [Serializable]
         public sealed class ScreenInfo
         {
-            [FormerlySerializedAs("path")]
-            [Header("Path to screen prefab from Resources folder")]
             [SerializeField]
+            [FormerlySerializedAs("path")]
             public string Path;
 
-            [FormerlySerializedAs("className")]
-            [Header("Full class name with namespace")]
             [SerializeField]
+            [FormerlySerializedAs("className")]
             public string ClassName;
         }
     }
