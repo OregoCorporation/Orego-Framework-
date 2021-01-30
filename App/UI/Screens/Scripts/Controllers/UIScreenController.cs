@@ -87,6 +87,11 @@ namespace OregoFramework.App
 
         #region Transitions
 
+        public void ChangeScreen<T>(object sender, IUITransition transition = null) where T : UIScreen
+        {
+            this.ChangeScreen(sender, typeof(T), transition);
+        }
+        
         /// <summary>
         ///     <para>Changes screens.</para>
         ///     <para>Closes a previous screen and opens a new screen.</para>
@@ -96,19 +101,19 @@ namespace OregoFramework.App
         public virtual void ChangeScreen(
             object sender,
             Type screenType,
-            UIScreenTransition transition = null
+            IUITransition transition = null
         )
         {
             var previousScreen = this.CurrentScreen;
             if (!ReferenceEquals(previousScreen, null))
             {
                 this.CurrentScreen = null;
-                previousScreen.OnUnload(sender);
+                ((IUITransitionable) previousScreen).OnUnload(sender);
                 this.UnloadScreen(previousScreen);
             }
 
             var nextScreen = this.LoadScreen(screenType);
-            nextScreen.OnLoaded(sender, transition);
+            ((IUITransitionable) nextScreen).OnLoaded(sender, transition);
             this.CurrentScreen = nextScreen;
             this.OnScreenChangedEvent?.Invoke(this.CurrentScreen);
         }

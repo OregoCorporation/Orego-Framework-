@@ -5,7 +5,7 @@ namespace OregoFramework.App
     /// <summary>
     ///     <para>UIScreen is an state of application screen.</para>
     /// </summary>
-    public abstract class UIScreen : UIElement
+    public abstract class UIScreen : UIElement, IUITransitionable
     {
         /// <summary>
         ///     <para>Is <see cref="_parent"/> is null or not.</para>
@@ -37,7 +37,7 @@ namespace OregoFramework.App
         /// </summary>
         /// <param name="sender">Who has started this screen.</param>
         /// <param name="transition">Input args.</param>
-        public virtual void OnLoaded(object sender, UIScreenTransition transition = null)
+        void IUITransitionable.OnLoaded(object sender, IUITransition transition)
         {
         }
 
@@ -45,18 +45,18 @@ namespace OregoFramework.App
         ///     <para>Called when controller has unloaded this screen.</para>
         /// </summary>
         /// <param name="sender">Who has started next screen.</param>
-        public virtual void OnUnload(object sender)
+        void IUITransitionable.OnUnload(object sender)
         {
         }
 
         /// <inheritdoc cref="UIScreenController.ChangeScreen"/>
-        protected void ChangeScreen<T>(UIScreenTransition transition = null) where T : UIScreen
+        protected virtual void ChangeScreen<T>(IUITransition transition = null) where T : UIScreen
         {
-            this.ChangeScreen(typeof(T), transition);
+            this.Parent.ChangeScreen<T>(this, transition);
         }
         
         /// <inheritdoc cref="UIScreenController.ChangeScreen"/>
-        protected void ChangeScreen(Type screenType, UIScreenTransition transition = null)
+        protected virtual void ChangeScreen(Type screenType, IUITransition transition = null)
         {
             this.Parent.ChangeScreen(this, screenType, transition);
         }
