@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using OregoFramework.Util;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace OregoFramework.App
 {
@@ -40,9 +39,8 @@ namespace OregoFramework.App
         protected readonly Dictionary<Type, string> ScreenPathMap;
         
         /// <inheritdoc cref="UIScreenConfig"/> 
-        [FormerlySerializedAs("config")]
         [SerializeField]
-        protected UIScreenConfig Config;
+        protected UIScreenAsset[] screenAssets;
         
         protected UIScreenController()
         {
@@ -64,16 +62,15 @@ namespace OregoFramework.App
 
         private void LoadScreenPaths()
         {
-            var infoArray = this.Config.Array;
-            foreach (var screenInfo in infoArray)
+            foreach (var asset in this.screenAssets)
             {
-                var screenType = Type.GetType(screenInfo.ClassName);
+                var screenType = Type.GetType(asset.ClassName);
                 if (screenType is null)
                 {
-                    throw new Exception($"Screen type {screenInfo.ClassName} is not found!");
+                    throw new Exception($"Screen type {asset.ClassName} is not found!");
                 }
                 
-                this.ScreenPathMap[screenType] = screenInfo.Path;
+                this.ScreenPathMap.Add(screenType, asset.Path);
             }
         }
 
