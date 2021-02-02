@@ -16,7 +16,7 @@ namespace OregoFramework.App
         ///     <para>Called when screens change.</para>
         ///     <param name="UIScreen">A new screen.</param>
         /// </summary>
-        public event Action<UIScreen> OnScreenChangedEvent;
+        public event Action<object, UIScreen> OnScreenChangedEvent;
 
         #endregion
 
@@ -33,15 +33,14 @@ namespace OregoFramework.App
             get { return this.transform; }
         }
 
+        [SerializeField]
+        protected ClassAsset[] screenAssets;
+        
         /// <summary>
         ///     <para>Keeps screen type vs prefab path.</para>
         /// </summary>
         protected readonly Dictionary<Type, string> ScreenPathMap;
-        
-        /// <inheritdoc cref="UIScreenConfig"/> 
-        [SerializeField]
-        protected UIScreenAsset[] screenAssets;
-        
+
         protected UIScreenController()
         {
             this.ScreenPathMap = new Dictionary<Type, string>();
@@ -55,12 +54,12 @@ namespace OregoFramework.App
         /// </summary>
         public void Initialize()
         {
-            this.LoadScreenPaths();
+            this.SetupScreensMetadata();
             this.OnInitialize();
             this.ChangeScreen(this, this.GetFirstScreenType());
         }
 
-        private void LoadScreenPaths()
+        private void SetupScreensMetadata()
         {
             foreach (var asset in this.screenAssets)
             {
@@ -70,7 +69,7 @@ namespace OregoFramework.App
                     throw new Exception($"Screen type {asset.ClassName} is not found!");
                 }
                 
-                this.ScreenPathMap.Add(screenType, asset.Path);
+                this.ScreenPathMap.Add(screenType, asset.AssetPath);
             }
         }
 
@@ -110,9 +109,9 @@ namespace OregoFramework.App
             }
 
             var nextScreen = this.LoadScreen(screenType);
-            ((IUITransitionable) nextScreen).OnLoaded(sender, transition);
+            ((IUITransitionable) nextScreen).OnLoad(sender, transition);
             this.CurrentScreen = nextScreen;
-            this.OnScreenChangedEvent?.Invoke(this.CurrentScreen);
+            this.OnScreenChangedEvent?.Invoke(sender, this.CurrentScreen);
         }
 
         protected virtual UIScreen LoadScreen(Type screenType)

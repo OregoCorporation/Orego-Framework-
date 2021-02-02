@@ -9,7 +9,7 @@ namespace OregoFramework.App
 
     public interface IUITransitionable
     {
-        void OnLoaded(object sender, IUITransition transition = null);
+        void OnLoad(object sender, IUITransition transition = null);
 
         void OnUnload(object sender);
     }

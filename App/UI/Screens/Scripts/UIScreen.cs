@@ -11,7 +11,7 @@ namespace OregoFramework.App
         ///     <para>Is <see cref="_parent"/> is null or not.</para>
         /// </summary>
         private bool isParentProvided;
-        
+
         /// <summary>
         ///     <para>An UI screen controller reference.</para>
         /// </summary>
@@ -37,7 +37,12 @@ namespace OregoFramework.App
         /// </summary>
         /// <param name="sender">Who has started this screen.</param>
         /// <param name="transition">Input args.</param>
-        void IUITransitionable.OnLoaded(object sender, IUITransition transition)
+        void IUITransitionable.OnLoad(object sender, IUITransition transition)
+        {
+            this.OnLoad(sender, transition);
+        }
+
+        protected virtual void OnLoad(object sender, IUITransition transition)
         {
         }
 
@@ -47,6 +52,11 @@ namespace OregoFramework.App
         /// <param name="sender">Who has started next screen.</param>
         void IUITransitionable.OnUnload(object sender)
         {
+            this.OnUnload(sender);
+        }
+        
+        protected virtual void OnUnload(object sender)
+        {
         }
 
         /// <inheritdoc cref="UIScreenController.ChangeScreen"/>
@@ -54,7 +64,7 @@ namespace OregoFramework.App
         {
             this.Parent.ChangeScreen<T>(this, transition);
         }
-        
+
         /// <inheritdoc cref="UIScreenController.ChangeScreen"/>
         protected virtual void ChangeScreen(Type screenType, IUITransition transition = null)
         {

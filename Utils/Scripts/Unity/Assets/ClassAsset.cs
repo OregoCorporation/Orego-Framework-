@@ -1,21 +1,21 @@
 using UnityEngine;
 
-namespace OregoFramework.App
+namespace OregoFramework.Util
 {
     /// <summary>
-    ///     <para>A screen metadata.</para>
+    ///     <para>A class metadata.</para>
     /// </summary>
     [CreateAssetMenu(
-        fileName = "UIScreenAsset",
-        menuName = "Orego/App/UI/New UI UIScreenAsset"
+        fileName = "ClassAsset",
+        menuName = "Orego/Util/New ClassAsset"
     )]
-    public class UIScreenAsset : ScriptableObject
+    public class ClassAsset : ScriptableObject
     {
         /// <summary>
-        ///     <para>Path to prefab.</para>
+        ///     <para>Path to asset.</para>
         /// </summary>
         [SerializeField]
-        public string Path;
+        public string AssetPath;
 
         /// <summary>
         ///     <para>Full class name with namespace.</para>
