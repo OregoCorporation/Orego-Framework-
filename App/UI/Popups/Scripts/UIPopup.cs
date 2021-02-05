@@ -10,8 +10,11 @@ namespace OregoFramework.App
 
         #endregion
 
+        protected IUITransition transition { get; set; }
+
         void IUITransitionable.OnLoad(object sender, IUITransition transition)
         {
+            this.transition = transition;
             this.OnLoad(sender, transition);
         }
 

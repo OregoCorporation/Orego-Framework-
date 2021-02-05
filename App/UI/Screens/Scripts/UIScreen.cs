@@ -31,6 +31,8 @@ namespace OregoFramework.App
                 return this._parent;
             }
         }
+        
+        protected IUITransition transition { get; set; }
 
         /// <summary>
         ///     <para>Called when controller has loaded this screen.</para>
@@ -39,6 +41,7 @@ namespace OregoFramework.App
         /// <param name="transition">Input args.</param>
         void IUITransitionable.OnLoad(object sender, IUITransition transition)
         {
+            this.transition = transition;
             this.OnLoad(sender, transition);
         }
 
