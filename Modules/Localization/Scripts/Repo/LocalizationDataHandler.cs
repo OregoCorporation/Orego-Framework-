@@ -4,7 +4,7 @@ using OregoFramework.Util;
 
 namespace OregoFramework.Module
 {
-    public abstract class LocalizationDataHandler : UpdateDataHandler
+    public abstract class LocalizationUpdateHandler : DataUpdateHandler
     {
         protected LocalizationContent content { get; private set; }
 

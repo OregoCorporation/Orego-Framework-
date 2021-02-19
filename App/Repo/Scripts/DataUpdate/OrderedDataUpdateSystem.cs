@@ -6,10 +6,10 @@ namespace OregoFramework.App
     /// <summary>
     ///     <para>Asynchronously updates user data by order.</para>
     /// </summary>
-    public abstract class UpdateDataOrderSystem<T> : UpdateDataSystem<T>
-        where T : IUpdateDataHandler
+    public abstract class OrderedDataUpdateSystem<T> : DataUpdateSystem<T>
+        where T : IDataUpdateHandler
     {
-        /// <inheritdoc cref="IUpdateDataSystem.CheckForUpdates"/>
+        /// <inheritdoc cref="IDataUpdateSystem.CheckForUpdates"/>
         public sealed override IEnumerator CheckForUpdates()
         {
             foreach (var handler in this.Handlers)

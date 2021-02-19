@@ -6,7 +6,7 @@ namespace OregoFramework.App
     /// <summary>
     ///     <para>Checks and updates a user data.</para>
     /// </summary>
-    public interface IUpdateDataHandler : IRepoElement
+    public interface IDataUpdateHandler : IRepoElement
     {
         /// <summary>
         ///     <para>Checks and updates data asynchronously.</para>
@@ -17,10 +17,10 @@ namespace OregoFramework.App
         IEnumerator CheckForUpdates(Reference<bool> isUpdated = null);
     }
     
-    /// <inheritdoc cref="IUpdateDataHandler"/>
-    public abstract class UpdateDataHandler : RepoElement, IUpdateDataHandler
+    /// <inheritdoc cref="IDataUpdateHandler"/>
+    public abstract class DataUpdateHandler : RepoElement, IDataUpdateHandler
     {
-        /// <inheritdoc cref="IUpdateDataHandler.CheckForUpdates"/>
+        /// <inheritdoc cref="IDataUpdateHandler.CheckForUpdates"/>
         public abstract IEnumerator CheckForUpdates(Reference<bool> isUpdated = null);
     }
 }

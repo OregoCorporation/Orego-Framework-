@@ -10,15 +10,15 @@ namespace OregoFramework.App
     /// <summary>
     ///     <para>Asynchronously updates user data through handler dependency graph.</para>
     /// </summary>
-    public abstract class UpdateDataDependencySystem<T> : UpdateDataSystem<T>
-        where T : IUpdateDataHandler
+    public abstract class DependencyDataUpdateSystem<T> : DataUpdateSystem<T>
+        where T : IDataUpdateHandler
     {
         /// <summary>
         ///     <para>Keeps handler dependencies of each other.</para>
         /// </summary>
         private readonly Dictionary<Type, HashSet<T>> DependencyHandlerMatrix;
 
-        public UpdateDataDependencySystem()
+        public DependencyDataUpdateSystem()
         {
             this.DependencyHandlerMatrix = new Dictionary<Type, HashSet<T>>();
         }

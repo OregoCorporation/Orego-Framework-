@@ -13,7 +13,7 @@ namespace OregoFramework.Module
 
         #endregion
 
-        protected IUpdateDataHandler dataHandler { get; private set; }
+        protected IDataUpdateHandler Handler { get; private set; }
 
         protected LocalizationStateDao dao { get; private set; }
 
@@ -22,7 +22,7 @@ namespace OregoFramework.Module
         protected override void OnCreate()
         {
             base.OnCreate();
-            this.dataHandler = this.CreateElement<LocalizationDataHandler>();
+            this.Handler = this.CreateElement<LocalizationUpdateHandler>();
         }
 
         protected override void OnPrepare()
@@ -34,7 +34,7 @@ namespace OregoFramework.Module
 
         protected IEnumerator BeginSession()
         {
-            yield return this.dataHandler.CheckForUpdates();
+            yield return this.Handler.CheckForUpdates();
             var state = this.dao.GetState();
             this.OnStateReadyEvent?.Invoke(state);
         }

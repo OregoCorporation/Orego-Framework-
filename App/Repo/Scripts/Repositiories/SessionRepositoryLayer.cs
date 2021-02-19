@@ -66,20 +66,20 @@ namespace OregoFramework.App
         /// <summary>
         ///     <para>Check for updates user data when a user session starts.</para>
         /// </summary>
-        protected IUpdateDataSystem UpdateDataSystem { get; set; }
+        protected IDataUpdateSystem DataUpdateSystem { get; set; }
 
         protected override void OnCreate()
         {
             base.OnCreate();
-            this.UpdateDataSystem = this.CreateUpdatingDataSystem();
+            this.DataUpdateSystem = this.CreateUpdatingDataSystem();
         }
 
-        protected abstract IUpdateDataSystem CreateUpdatingDataSystem();
+        protected abstract IDataUpdateSystem CreateUpdatingDataSystem();
         
         /// <inheritdoc cref="ISessionRepositoryLayer.BeginSession"/>
         public IEnumerator BeginSession()
         {
-            yield return this.UpdateDataSystem.CheckForUpdates();
+            yield return this.DataUpdateSystem.CheckForUpdates();
             var repositories = this.GetRepositories<ISessionRepository>();
             foreach (var repository in repositories)
             {

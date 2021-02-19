@@ -6,9 +6,9 @@ namespace OregoFramework.App
     /// <summary>
     ///     <para>Asynchronously updates user data through handlers one by one.</para>
     /// </summary>
-    public abstract class UpdateDataLoopSystem<T> : UpdateDataSystem<T> where T : IUpdateDataHandler
+    public abstract class LoopDataUpdateSystem<T> : DataUpdateSystem<T> where T : IDataUpdateHandler
     {
-       /// <inheritdoc cref="IUpdateDataSystem.CheckForUpdates"/>
+       /// <inheritdoc cref="IDataUpdateSystem.CheckForUpdates"/>
         public sealed override IEnumerator CheckForUpdates()
         {
             var isCheckForUpdatesRequired = true;

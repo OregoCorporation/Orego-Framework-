@@ -7,7 +7,7 @@ namespace OregoFramework.App
     /// <summary>
     ///     <para>Check for updates user data.</para>
     /// </summary>
-    public interface IUpdateDataSystem : IRepoElement
+    public interface IDataUpdateSystem : IRepoElement
     {
         /// <summary>
         ///     <para>Updates data in repository layer asynchronously.</para>
@@ -15,14 +15,14 @@ namespace OregoFramework.App
         IEnumerator CheckForUpdates();
     }
     
-    /// <inheritdoc cref="IUpdateDataSystem"/>
+    /// <inheritdoc cref="IDataUpdateSystem"/>
     /// <summary>
     ///     <para>Check for updates user data through data handlers.</para>
     ///     <para>Keeps data handlers.</para>
     /// </summary>
     /// <typeparam name="T">Base data handler class.</typeparam>
-    public abstract class UpdateDataSystem<T> : RepoElement, IUpdateDataSystem
-        where T : IUpdateDataHandler
+    public abstract class DataUpdateSystem<T> : RepoElement, IDataUpdateSystem
+        where T : IDataUpdateHandler
     {
         /// <summary>
         ///     <para>Use this handlers for update user data in <see cref="CheckForUpdates"/>.</para>
@@ -35,7 +35,7 @@ namespace OregoFramework.App
             this.Handlers = this.CreateElements<T>();
         }
         
-        /// <inheritdoc cref="IUpdateDataSystem.CheckForUpdates"/>
+        /// <inheritdoc cref="IDataUpdateSystem.CheckForUpdates"/>
         public abstract IEnumerator CheckForUpdates();
     }
 }
