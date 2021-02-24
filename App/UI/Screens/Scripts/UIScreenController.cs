@@ -54,12 +54,12 @@ namespace OregoFramework.App
         /// </summary>
         public void Initialize()
         {
-            this.SetupScreensMetadata();
+            this.SetupScreenAssets();
             this.OnInitialize();
             this.ChangeScreen(this, this.GetFirstScreenType());
         }
 
-        private void SetupScreensMetadata()
+        private void SetupScreenAssets()
         {
             foreach (var asset in this.screenAssets)
             {
@@ -83,7 +83,7 @@ namespace OregoFramework.App
 
         #region Transitions
 
-        public void ChangeScreen<T>(object sender, IUITransition transition = null) where T : UIScreen
+        public void ChangeScreen<T>(object sender, IUIStateTransition transition = null) where T : UIScreen
         {
             this.ChangeScreen(sender, typeof(T), transition);
         }
@@ -97,19 +97,19 @@ namespace OregoFramework.App
         public virtual void ChangeScreen(
             object sender,
             Type screenType,
-            IUITransition transition = null
+            IUIStateTransition transition = null
         )
         {
             var previousScreen = this.CurrentScreen;
             if (!ReferenceEquals(previousScreen, null))
             {
                 this.CurrentScreen = null;
-                ((IUITransitionable) previousScreen).OnUnload(sender);
+                ((IUIStateable) previousScreen).OnExit(sender);
                 this.UnloadScreen(previousScreen);
             }
 
             var nextScreen = this.LoadScreen(screenType);
-            ((IUITransitionable) nextScreen).OnLoad(sender, transition);
+            ((IUIStateable) nextScreen).OnEnter(sender, transition);
             this.CurrentScreen = nextScreen;
             this.OnScreenChangedEvent?.Invoke(sender, this.CurrentScreen);
         }

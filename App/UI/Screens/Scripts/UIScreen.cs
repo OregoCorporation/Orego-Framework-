@@ -5,7 +5,7 @@ namespace OregoFramework.App
     /// <summary>
     ///     <para>UIScreen is an state of application screen.</para>
     /// </summary>
-    public abstract class UIScreen : UIElement, IUITransitionable
+    public abstract class UIScreen : UIElement, IUIStateable
     {
         /// <summary>
         ///     <para>Is <see cref="_parent"/> is null or not.</para>
@@ -32,20 +32,20 @@ namespace OregoFramework.App
             }
         }
         
-        protected IUITransition transition { get; set; }
+        protected IUIStateTransition transition { get; set; }
 
         /// <summary>
         ///     <para>Called when controller has loaded this screen.</para>
         /// </summary>
         /// <param name="sender">Who has started this screen.</param>
         /// <param name="transition">Input args.</param>
-        void IUITransitionable.OnLoad(object sender, IUITransition transition)
+        void IUIStateable.OnEnter(object sender, IUIStateTransition transition)
         {
             this.transition = transition;
-            this.OnLoad(sender, transition);
+            this.OnEnter(sender);
         }
 
-        protected virtual void OnLoad(object sender, IUITransition transition)
+        protected virtual void OnEnter(object sender)
         {
         }
 
@@ -53,23 +53,23 @@ namespace OregoFramework.App
         ///     <para>Called when controller has unloaded this screen.</para>
         /// </summary>
         /// <param name="sender">Who has started next screen.</param>
-        void IUITransitionable.OnUnload(object sender)
+        void IUIStateable.OnExit(object sender)
         {
-            this.OnUnload(sender);
+            this.OnExit(sender);
         }
         
-        protected virtual void OnUnload(object sender)
+        protected virtual void OnExit(object sender)
         {
         }
 
         /// <inheritdoc cref="UIScreenController.ChangeScreen"/>
-        protected virtual void ChangeScreen<T>(IUITransition transition = null) where T : UIScreen
+        protected virtual void ChangeScreen<T>(IUIStateTransition transition = null) where T : UIScreen
         {
             this.Parent.ChangeScreen<T>(this, transition);
         }
 
         /// <inheritdoc cref="UIScreenController.ChangeScreen"/>
-        protected virtual void ChangeScreen(Type screenType, IUITransition transition = null)
+        protected virtual void ChangeScreen(Type screenType, IUIStateTransition transition = null)
         {
             this.Parent.ChangeScreen(this, screenType, transition);
         }

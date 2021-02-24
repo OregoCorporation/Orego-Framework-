@@ -24,7 +24,7 @@ namespace OregoFramework.App
         public sealed override void ChangeScreen(
             object sender,
             Type screenType,
-            IUITransition transition = null
+            IUIStateTransition transition = null
         )
         {
             var previousScreen = this.CurrentScreen;
@@ -37,7 +37,7 @@ namespace OregoFramework.App
             base.ChangeScreen(sender, screenType, transition);
         }
 
-        public void ChangeToPreviousScreen(object sender, IUITransition transition = null)
+        public void ChangeToPreviousScreen(object sender, IUIStateTransition transition = null)
         {
             var nextScreenType = !this.previousScreenStack.IsEmpty()
                 ? this.previousScreenStack.Pop()

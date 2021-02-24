@@ -2,7 +2,7 @@ using System;
 
 namespace OregoFramework.App
 {
-    public abstract class UIPopup : UIElement, IUITransitionable
+    public abstract class UIPopup : UIElement, IUIStateable
     {
         #region Event
 
@@ -10,24 +10,24 @@ namespace OregoFramework.App
 
         #endregion
 
-        protected IUITransition transition { get; set; }
+        protected IUIStateTransition transition { get; set; }
 
-        void IUITransitionable.OnLoad(object sender, IUITransition transition)
+        void IUIStateable.OnEnter(object sender, IUIStateTransition transition)
         {
             this.transition = transition;
-            this.OnLoad(sender, transition);
+            this.OnEnter(sender);
         }
 
-        protected virtual void OnLoad(object sender, IUITransition transition)
+        protected virtual void OnEnter(object sender)
         {
         }
 
-        void IUITransitionable.OnUnload(object sender)
+        void IUIStateable.OnExit(object sender)
         {
-            this.OnUnload(sender);
+            this.OnExit(sender);
         }
 
-        protected virtual void OnUnload(object sender)
+        protected virtual void OnExit(object sender)
         {
         }
 

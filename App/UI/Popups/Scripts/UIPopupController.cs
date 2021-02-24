@@ -87,16 +87,16 @@ namespace OregoFramework.App
             return this.DisplayedPopupMap.ContainsKey(popupType);
         }
 
-        public UIPopup ShowPopup<T>(object sender, IUITransition transition = null)
+        public UIPopup ShowPopup<T>(object sender, IUIStateTransition transition = null)
         {
             return this.ShowPopup(sender, typeof(T), transition);
         }
 
-        public virtual UIPopup ShowPopup(object sender, Type popupType, IUITransition transition = null)
+        public virtual UIPopup ShowPopup(object sender, Type popupType, IUIStateTransition transition = null)
         {
             var popup = this.LoadPopup(popupType);
             popup.OnDisposeEvent += this.OnDisposePopup;
-            ((IUITransitionable) popup).OnLoad(sender, transition);
+            ((IUIStateable) popup).OnEnter(sender, transition);
             this.DisplayedPopupMap.Add(popupType, popup);
             this.OnShowPopupEvent?.Invoke(sender, popup);
             return popup;
@@ -107,7 +107,7 @@ namespace OregoFramework.App
             popup.OnDisposeEvent -= this.OnDisposePopup;
             var popupType = popup.GetType();
             this.DisplayedPopupMap.Remove(popupType);
-            ((IUITransitionable) popup).OnUnload(sender);
+            ((IUIStateable) popup).OnExit(sender);
             this.OnHidePopupEvent?.Invoke(sender, popup);
             this.UnloadPopup(popup);
         }
