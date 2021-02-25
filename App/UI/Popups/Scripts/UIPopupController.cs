@@ -68,15 +68,6 @@ namespace OregoFramework.App
 
         #endregion
 
-        #region UICallbacks
-
-        private void OnDisposePopup(UIPopup popup)
-        {
-            this.HidePopup(popup, popup);
-        }
-
-        #endregion
-
         public bool IsDisplayedPopup<T>()
         {
             return this.IsDisplayedPopup(typeof(T));
@@ -95,7 +86,6 @@ namespace OregoFramework.App
         public virtual UIPopup ShowPopup(object sender, Type popupType, IUIStateTransition transition = null)
         {
             var popup = this.LoadPopup(popupType);
-            popup.OnDisposeEvent += this.OnDisposePopup;
             ((IUIStateable) popup).OnEnter(sender, transition);
             this.DisplayedPopupMap.Add(popupType, popup);
             this.OnShowPopupEvent?.Invoke(sender, popup);
@@ -104,7 +94,6 @@ namespace OregoFramework.App
 
         public void HidePopup(object sender, UIPopup popup)
         {
-            popup.OnDisposeEvent -= this.OnDisposePopup;
             var popupType = popup.GetType();
             this.DisplayedPopupMap.Remove(popupType);
             ((IUIStateable) popup).OnExit(sender);
@@ -133,7 +122,7 @@ namespace OregoFramework.App
 
         public IEnumerable<UIPopup> GetDisplayedPopups()
         {
-            return new List<UIPopup>(this.DisplayedPopupMap.Values);
+            return new HashSet<UIPopup>(this.DisplayedPopupMap.Values);
         }
 
         protected virtual UIPopup LoadPopup(Type popupType)

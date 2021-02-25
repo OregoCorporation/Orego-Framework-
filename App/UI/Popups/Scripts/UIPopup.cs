@@ -1,15 +1,7 @@
-using System;
-
 namespace OregoFramework.App
 {
     public abstract class UIPopup : UIElement, IUIStateable
     {
-        #region Event
-
-        public event Action<UIPopup> OnDisposeEvent;
-
-        #endregion
-
         protected IUIStateTransition transition { get; set; }
 
         void IUIStateable.OnEnter(object sender, IUIStateTransition transition)
@@ -29,11 +21,6 @@ namespace OregoFramework.App
 
         protected virtual void OnExit(object sender)
         {
-        }
-
-        protected virtual void Dispose()
-        {
-            this.OnDisposeEvent?.Invoke(this);
         }
     }
 }
