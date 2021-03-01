@@ -30,11 +30,14 @@ namespace OregoFramework.App
         ///     <para>An application frame reference.</para>
         /// </summary>
         protected IApplicationFrame Application { get; private set; }
+        
+        protected IDatabaseLayer DatabaseLayer { get; private set; }
 
         protected override void OnPrepare()
         {
             base.OnPrepare();
             this.Application = this.GetRootElement<IApplicationFrame>();
+            this.DatabaseLayer = this.Application.DatabaseLayer;
         }
         
         /// <inheritdoc cref="IDatabase.GetDao{T}"/>
