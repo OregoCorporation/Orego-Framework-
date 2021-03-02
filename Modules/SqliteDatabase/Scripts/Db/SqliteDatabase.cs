@@ -5,25 +5,23 @@ using System.Collections;
 using System.Data;
 using System.Data.Common;
 using Mono.Data.Sqlite;
+using OregoFramework.App;
 using UnityEngine;
 
 #pragma warning disable 618
 
-namespace OregoFramework.App
+namespace OregoFramework.Module
 {
     public abstract class SqliteDatabase : Database<ISqliteDao>
     {
-        /// <summary>
-        ///     <para>A connection to sqlite database.</para>
-        /// </summary>
         public DbConnection Connection { get; private set; }
 
-        /// <summary>
-        ///     <para>URI database connection.</para>
-        /// </summary>
+        public bool IsConnected
+        {
+            get { return this.Connection != null; }
+        }
+        
         protected string ConnectionUri { get; private set; }
-
-        public bool IsConnected { get; private set; }
 
         #region Connect
 
@@ -37,15 +35,15 @@ namespace OregoFramework.App
                 throw new Exception("Database is already connected!");
             }
 
-            this.ConnectionUri = connectionUri;
-            this.Connection = new SqliteConnection(connectionUri);
-            this.Connection.Open();
-            if (this.Connection.State != ConnectionState.Open)
+            var dbConnection = new SqliteConnection(connectionUri);
+            dbConnection.Open();
+            if (dbConnection.State != ConnectionState.Open)
             {
-                throw new Exception("Can not connect to db!");
+                throw new Exception($"Can't connect to {connectionUri}!");
             }
-            
-            this.IsConnected = true;
+
+            this.Connection = dbConnection;
+            this.ConnectionUri = connectionUri;
 
             yield return this.OnConnect();
             var sqlDaoSet = this.GetElements<ISqliteDao>();
@@ -71,10 +69,12 @@ namespace OregoFramework.App
             {
                 return;
             }
-            
-            this.Connection.Close();
-            this.Connection.Dispose();
-            this.IsConnected = false;
+
+            var connection = this.Connection;
+            connection.Close();
+            connection.Dispose();
+            this.Connection = null;
+            this.ConnectionUri = null;
         }
     }
 }

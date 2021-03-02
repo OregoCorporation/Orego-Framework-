@@ -5,9 +5,10 @@ using System.Collections;
 using System.Data.Common;
 using System.Text;
 using System.Threading.Tasks;
+using OregoFramework.App;
 using OregoFramework.Util;
 
-namespace OregoFramework.App
+namespace OregoFramework.Module
 {
     /// <summary>
     ///     <para>Queries a sqlite database.</para>
