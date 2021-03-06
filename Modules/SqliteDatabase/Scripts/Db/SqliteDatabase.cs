@@ -6,7 +6,6 @@ using System.Data;
 using System.Data.Common;
 using Mono.Data.Sqlite;
 using OregoFramework.App;
-using UnityEngine;
 
 #pragma warning disable 618
 
@@ -39,7 +38,7 @@ namespace OregoFramework.Module
             dbConnection.Open();
             if (dbConnection.State != ConnectionState.Open)
             {
-                throw new Exception($"Can't connect to {connectionUri}!");
+                throw new Exception($"Can't connect to db {connectionUri}!");
             }
 
             this.Connection = dbConnection;

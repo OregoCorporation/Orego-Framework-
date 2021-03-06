@@ -3,7 +3,7 @@ using UnityEngine;
 namespace OregoFramework.Util
 {
     /// <summary>
-    ///     <para>A class metadata.</para>
+    ///     <para>A asset metadata.</para>
     /// </summary>
     [CreateAssetMenu(
         fileName = "ClassAsset",

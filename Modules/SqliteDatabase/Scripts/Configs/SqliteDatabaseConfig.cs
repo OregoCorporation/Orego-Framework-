@@ -11,15 +11,13 @@ namespace OregoFramework.App
     public class SqliteDatabaseConfig : ScriptableObject
     {
         [SerializeField]
-        public int Version = 1;
+        public int Version = 2;
 
         [SerializeField]
-        public string DatabaseName;
+        public string DatabaseName = "tp-database.db";
 
-        public virtual string GetVersionPrefsKey()
-        {
-            return $"{this.DatabaseName}/db_version";
-        }
+        [SerializeField]
+        public string VersionPrefsKey = "TankPuzzlers/db_version";
     }
 }
 #endif

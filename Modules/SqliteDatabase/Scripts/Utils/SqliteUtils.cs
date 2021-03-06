@@ -41,6 +41,12 @@ namespace OregoFramework.Module
             }
 
             yield return InstallDatabase(originPath, targetPath);
+//             
+// #if UNITY_EDITOR
+//             yield break;
+// #elif UNITY_ANDROID
+//             
+// #endif
         }
 
         public static IEnumerator InstallDatabaseIfAbsent(string originPath, string targetPath)
@@ -49,30 +55,53 @@ namespace OregoFramework.Module
             {
                 yield return InstallDatabase(originPath, targetPath);
             }
+            
+// #if UNITY_EDITOR
+//             yield break;
+// #elif UNITY_ANDROID
+//             
+// #endif
         }
 
         public static IEnumerator InstallDatabase(string originPath, string targetPath)
         {
+            
             var request = UnityWebRequest.Get(originPath);
             yield return request.SendWebRequest();
             File.WriteAllBytes(targetPath, request.downloadHandler.data);
+//             
+// #if UNITY_EDITOR
+//             yield break;
+// #elif UNITY_ANDROID
+// #endif
         }
 
-        public static (string, string) GetOriginAndTargetPaths(string databaseName)
+        public static string GetConnectionUri(string databaseName)
         {
-            var dataPath = UnityEngine.Application.dataPath;
-            var persistentDataPath = UnityEngine.Application.persistentDataPath;
+            var dbPath = GetTargetPath(databaseName);
+            return $"URI=file:{dbPath}";
+        }
 
-            string originPath;
+        public static string GetTargetPath(string databaseName)
+        {
             string targetPath;
 #if UNITY_EDITOR
-            originPath = $"{dataPath}/StreamingAssets/{databaseName}";
-            targetPath = $"{dataPath}/StreamingAssets/{databaseName}";
+            targetPath = $"{UnityEngine.Application.dataPath}/Editor/{databaseName}";
 #elif UNITY_ANDROID
-            originPath = $"jar:file://{dataPath}!/assets/{databaseName}";
-            targetPath = $"{persistentDataPath}/{databaseName}";
+            targetPath = $"{UnityEngine.Application.persistentDataPath}/{databaseName}";
 #endif
-            return (originPath, targetPath);
+            return targetPath;
+        }
+
+        public static string GetOriginPath(string databaseName)
+        {
+            string originPath;
+#if UNITY_EDITOR
+            originPath = $"{UnityEngine.Application.dataPath}/StreamingAssets/{databaseName}";
+#elif UNITY_ANDROID
+            originPath = $"jar:file://{UnityEngine.Application.dataPath}!/assets/{databaseName}";
+#endif
+            return originPath;
         }
     }
 }
