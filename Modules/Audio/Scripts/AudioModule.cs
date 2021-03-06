@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using OregoFramework.Utils;
+using OregoFramework.Util;
 using UnityEngine;
 
 namespace OregoFramework.Module

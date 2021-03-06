@@ -7,7 +7,6 @@ using System.Data;
 using Mono.Data.Sqlite;
 using OregoFramework.Module;
 using OregoFramework.Util;
-using OregoFramework.Utils;
 using UnityEngine;
 
 namespace OregoFramework.App

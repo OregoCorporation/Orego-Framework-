@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OregoFramework.Utils
+namespace OregoFramework.Util
 {
     public abstract class UnitySingleton<T> : MonoBehaviour where T : MonoBehaviour
     {
