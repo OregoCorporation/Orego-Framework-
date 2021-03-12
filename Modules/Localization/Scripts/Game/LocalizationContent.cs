@@ -20,7 +20,7 @@ namespace OregoFramework.Module
         
         public LocalizationSpreadsheet spreadsheet { get; private set; }
 
-        public override IEnumerator PreloadResources()
+        protected override IEnumerator OnPreloadResources()
         {
             yield return this.LoadConfig();
             yield return this.LoadSpreadsheet();

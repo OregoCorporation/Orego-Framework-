@@ -8,7 +8,7 @@ namespace OregoFramework.Module
     {
         #region Event
 
-        public static event Action OnLoadedEvent;
+        public static event Action OnPreloadedEvent;
 
         #endregion
 
@@ -23,7 +23,7 @@ namespace OregoFramework.Module
         public static IEnumerator PreloadResources()
         {
             yield return instance.PreloadResourcesInternal();
-            OnLoadedEvent?.Invoke();
+            OnPreloadedEvent?.Invoke();
         }
 
         protected IEnumerator PreloadResourcesInternal()
