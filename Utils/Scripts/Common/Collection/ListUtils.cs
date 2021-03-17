@@ -48,17 +48,5 @@ namespace OregoFramework.Util
             var lastIndex = list.LastIndex();
             return list[lastIndex];
         }
-
-        public static void Insert<T>(this List<T> list, T item, int index = -Int.ONE)
-        {
-            if (index < Int.ZERO)
-            {
-                list.Add(item);
-            }
-            else
-            {
-                list.Insert(index, item);
-            }
-        }
     }
 }
