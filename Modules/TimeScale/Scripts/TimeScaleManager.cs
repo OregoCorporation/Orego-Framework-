@@ -6,13 +6,13 @@ using UnityEngine;
 
 namespace OregoFramework.Module
 {
-    public sealed class TimeScaleStack : LazyUnitySingleton<TimeScaleStack>
+    public sealed class TimeScaleManager : LazyUnitySingleton<TimeScaleManager>
     {
         private readonly Stack<TimeScale> stack;
 
         private TimeScale currentScale;
         
-        public TimeScaleStack()
+        public TimeScaleManager()
         {
             this.stack = new Stack<TimeScale>();
         }

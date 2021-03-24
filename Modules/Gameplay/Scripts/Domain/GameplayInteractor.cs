@@ -74,22 +74,22 @@ namespace OregoFramework.Module
 
         protected virtual void OnGameStarted(object sender)
         {
-            TimeScaleStack.PushScale(this.PlayingTimeScale);
+            TimeScaleManager.PushScale(this.PlayingTimeScale);
         }
 
         protected virtual void OnGamePaused(object sender)
         {
-            TimeScaleStack.PushScale(this.PauseTimeScale);
+            TimeScaleManager.PushScale(this.PauseTimeScale);
         }
 
         protected virtual void OnGameResumed(object sender)
         {
-            TimeScaleStack.PopScale(this.PauseTimeScale);
+            TimeScaleManager.PopScale(this.PauseTimeScale);
         }
 
         protected virtual void OnGameFinihsed(object sender)
         {
-            TimeScaleStack.PopScale(this.PlayingTimeScale);
+            TimeScaleManager.PopScale(this.PlayingTimeScale);
         }
 
         public virtual void DestroyGame(object sender)
