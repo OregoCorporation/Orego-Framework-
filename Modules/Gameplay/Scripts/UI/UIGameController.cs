@@ -105,7 +105,7 @@ namespace OregoFramework.Module
 
         protected T GetContext<T>()
         {
-            return (T) this.Screen.AttachedContext;
+            return (T) this.Screen.AttachedSystem;
         }
     }
 }

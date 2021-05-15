@@ -1,11 +1,11 @@
 using System.Collections;
-using Gullis;
+using GameElementary;
 using OregoFramework.App;
 
 namespace OregoFramework.Module
 {
     public abstract class SceneGameLoader : DomainElement, ISceneLoader
     {
-        public abstract IEnumerator OnLoadScene(object sender, ISceneGameContext context);
+        public abstract IEnumerator OnLoadScene(object sender, ISceneGameSystem system);
     }
 }

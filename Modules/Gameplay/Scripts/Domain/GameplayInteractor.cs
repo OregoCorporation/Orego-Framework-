@@ -1,14 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Gullis;
+using GameElementary;
 using OregoFramework.App;
 using OregoFramework.Util;
 using UnityEngine;
 
 namespace OregoFramework.Module
 {
-    public abstract class GameplayInteractor<T> : Interactor where T : MonoBehaviour, IGameContext
+    public abstract class GameplayInteractor<T> : Interactor where T : MonoBehaviour, IGameSystem
     {
         #region Events
 
@@ -117,7 +117,7 @@ namespace OregoFramework.Module
         
         protected void RegisterLoaders(T context)
         {
-            if (!(context is ISceneGameContext sceneContext))
+            if (!(context is ISceneGameSystem sceneContext))
             {
                 return;
             }
@@ -130,7 +130,7 @@ namespace OregoFramework.Module
 
         protected void UnregisterLoaders(T context)
         {
-            if (!(context is ISceneGameContext sceneContext))
+            if (!(context is ISceneGameSystem sceneContext))
             {
                 return;
             }
@@ -143,22 +143,22 @@ namespace OregoFramework.Module
 
         protected void Subscribe(T context)
         {
-            context.OnGamePreparedEvent += this.OnGamePrepared;
-            context.OnGameReadyEvent += this.OnGameReady;
-            context.OnGameStartedEvent += this.OnGameStarted;
-            context.OnGamePausedEvent += this.OnGamePaused;
-            context.OnGameResumedEvent += this.OnGameResumed;
-            context.OnGameFinishedEvent += this.OnGameFinihsed;
+            context.OnGamePrepared += this.OnGamePrepared;
+            context.OnGameReady += this.OnGameReady;
+            context.OnGameStarted += this.OnGameStarted;
+            context.OnGamePaused += this.OnGamePaused;
+            context.OnGameResumed += this.OnGameResumed;
+            context.OnGameFinished += this.OnGameFinihsed;
         }
 
         protected void Unsubscribe(T context)
         {
-            context.OnGamePreparedEvent -= this.OnGamePrepared;
-            context.OnGameReadyEvent -= this.OnGameReady;
-            context.OnGameStartedEvent -= this.OnGameStarted;
-            context.OnGamePausedEvent -= this.OnGamePaused;
-            context.OnGameResumedEvent -= this.OnGameResumed;
-            context.OnGameFinishedEvent -= this.OnGameFinihsed;
+            context.OnGamePrepared -= this.OnGamePrepared;
+            context.OnGameReady -= this.OnGameReady;
+            context.OnGameStarted -= this.OnGameStarted;
+            context.OnGamePaused -= this.OnGamePaused;
+            context.OnGameResumed -= this.OnGameResumed;
+            context.OnGameFinished -= this.OnGameFinihsed;
         }
 
         protected IEnumerator AfterEndOfFrame(Action action)

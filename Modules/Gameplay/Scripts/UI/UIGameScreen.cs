@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Gullis;
+using GameElementary;
 using OregoFramework.App;
 using UnityEngine;
 
@@ -10,10 +10,10 @@ namespace OregoFramework.Module
     {
         public bool IsContextAttached
         {
-            get { return !ReferenceEquals(this.AttachedContext, null); }
+            get { return !ReferenceEquals(this.AttachedSystem, null); }
         }
 
-        public IGameContext AttachedContext { get; private set; }
+        public IGameSystem AttachedSystem { get; private set; }
 
         protected readonly HashSet<IUIGameController> Controllers;
 
@@ -36,7 +36,7 @@ namespace OregoFramework.Module
         
         public T ProvideContext<T>()
         {
-            return (T) this.AttachedContext;
+            return (T) this.AttachedSystem;
         }
         
         protected virtual bool RegisterController(IUIGameController controller)
@@ -61,20 +61,20 @@ namespace OregoFramework.Module
             return false;
         }
 
-        protected virtual void AttachContext(IGameContext context)
+        protected virtual void AttachContext(IGameSystem system)
         {
             if (this.IsContextAttached)
             {
                 throw new Exception("Game context is already attached!");
             }
 
-            context.OnGamePreparedEvent += this.OnGamePrepared;
-            context.OnGameReadyEvent += this.OnGameReady;
-            context.OnGameStartedEvent += this.OnGameStarted;
-            context.OnGamePausedEvent += this.OnGamePaused;
-            context.OnGameResumedEvent += this.OnGameResumed;
-            context.OnGameFinishedEvent += this.OnGameFinished;
-            this.AttachedContext = context;
+            system.OnGamePrepared += this.OnGamePrepared;
+            system.OnGameReady += this.OnGameReady;
+            system.OnGameStarted += this.OnGameStarted;
+            system.OnGamePaused += this.OnGamePaused;
+            system.OnGameResumed += this.OnGameResumed;
+            system.OnGameFinished += this.OnGameFinished;
+            this.AttachedSystem = system;
         }
 
         protected virtual void DetachContext()
@@ -84,15 +84,15 @@ namespace OregoFramework.Module
                 return;
             }
 
-            var context = this.AttachedContext;
-            context.OnGamePreparedEvent -= this.OnGamePrepared;
-            context.OnGameReadyEvent -= this.OnGameReady;
-            context.OnGameStartedEvent -= this.OnGameStarted;
-            context.OnGamePausedEvent -= this.OnGamePaused;
-            context.OnGameResumedEvent -= this.OnGameResumed;
-            context.OnGameFinishedEvent -= this.OnGameFinished;
+            var context = this.AttachedSystem;
+            context.OnGamePrepared -= this.OnGamePrepared;
+            context.OnGameReady -= this.OnGameReady;
+            context.OnGameStarted -= this.OnGameStarted;
+            context.OnGamePaused -= this.OnGamePaused;
+            context.OnGameResumed -= this.OnGameResumed;
+            context.OnGameFinished -= this.OnGameFinished;
 
-            this.AttachedContext = default;
+            this.AttachedSystem = default;
         }
 
         protected virtual void OnGamePrepared(object sender)
